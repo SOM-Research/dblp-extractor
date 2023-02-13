@@ -18,10 +18,15 @@ def connect():
         sys.exit(1)
     return conn.cursor()
 
-db = connect()
-file = open('../database/mariadbDDL.sql', 'r')
-for line in file.readlines():
-    db.execute(line)
+def createDatabaseFromDDL(ddlFile):
+    db = connect()
+    for line in ddlFile.read().split(';'):
+        if (line != ''):
+            line += ';'
+            print(line)
+            db.execute(line)
+    db.close()
 
+file = open('../database/mariadbDDL.sql', 'r')
+createDatabaseFromDDL(file)
 file.close()
-db.close()
