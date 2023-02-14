@@ -76,3 +76,16 @@ CREATE TABLE PublicationGroupEE(
     CONSTRAINT PK_PublicationGroup_EE PRIMARY KEY (publicationGroupId,electronicEdition),
     FOREIGN KEY (publicationGroupId) REFERENCES PublicationGroup(id)
 );
+
+CREATE TABLE Institution(
+    id VARCHAR(255) PRIMARY KEY,
+    name VARCHAR(255)
+);
+
+CREATE TABLE affiliation(
+    researcherId VARCHAR(255),
+    institutionId VARCHAR(255),
+    CONSTRAINT PK_Affiliation PRIMARY KEY (researcherId, institutionId),
+    FOREIGN KEY (researcherId) REFERENCES Researcher(id),
+    FOREIGN KEY (institutionId) REFERENCES Institution(id)
+)
