@@ -4,3 +4,5 @@ db:
   user: root
   password: 'my secret password'
   db: metascience
+  ddl_path: '../database/mariadbDDL.sql'
+  raw_data_path: '../data/data_example.xml'
