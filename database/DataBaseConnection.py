@@ -32,10 +32,9 @@ class DataBaseConnection():
         conn = self.connection()
         return conn.cursor()
 
-    def createDatabaseFromDDL(self):
+    def createDatabaseFromDDL(self, filePath):
         db = self.connect()
-        cfg = self.config()
-        ddlFile = open(cfg['db']['ddl_path'])
+        ddlFile = open(filePath)
         for line in ddlFile.read().split(';'):
             if (line != ''):
                 line += ';'

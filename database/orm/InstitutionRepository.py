@@ -1,10 +1,9 @@
 from sqlalchemy import select
 
+from database.orm import RepositoryBase
 from model.Institution import Institution
 
-class InstitutionRepository():
-    def __init__(self, alchemySession):
-        self.session = alchemySession
+class InstitutionRepository(RepositoryBase):
 
     def updateSession(self, session):
         self.session = session
