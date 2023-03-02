@@ -3,18 +3,18 @@ from typing import List
 from sqlalchemy import Column, String, ForeignKey, UUID, DATE, Text, Table
 from sqlalchemy.orm import relationship, Mapped
 
-from model import Base
+from model import ModelBase
 
 affiliation = Table(
     "affiliations",
-    Base.metadata,
+    ModelBase.metadata,
     Column("researcher_id", ForeignKey("researchers.id"), primary_key=True),
     Column("institution_id", ForeignKey("institutions.id"), primary_key=True),
 )
 
 
 # an example mapping using the base
-class Researcher(Base):
+class Researcher(ModelBase):
     __tablename__ = "researchers"
 
     id = Column(UUID, primary_key=True)

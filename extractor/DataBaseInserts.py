@@ -1,15 +1,13 @@
 from uuid import uuid4
 import xml.etree.ElementTree as ET
-
 from model.XmlKey import XmlKey
 
-
-class DataBaseInsterts():
+class DataBaseInserts():
 
     def __init__(self, alchemySession):
         self.session = alchemySession
 
-    def insertResearcher(self, item, repoResercher, repoInst):
+    def insertResearcher(self, item, repoResearcher, repoInst):
         institutionNotSaved = 0
         key = item.attrib.get('key')
         mdate = item.attrib.get('mdate')
@@ -45,7 +43,7 @@ class DataBaseInsterts():
         if len(names) > 0:
             name = names[0]
         try:
-            researcher = repoResercher.insertResearcher(id, name, key, mdate, xmlItem, names, aff)
+            researcher = repoResearcher.insertResearcher(id, name, key, mdate, xmlItem, names, aff)
             return {"researcher": researcher}
         except:
             print("Error insert research -> id: ", id, " | name: ", name, " | key: ", key)

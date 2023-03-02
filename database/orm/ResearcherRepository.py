@@ -1,11 +1,10 @@
+from database.orm import RepositoryBase
 from model.Researcher import Researcher
 from model.ResearcherName import ResearcherName
 from model.XmlKey import XmlKey
 from sqlalchemy import select
 
-class ResearcherRepository():
-    def __init__(self, session):
-        self.session = session
+class ResearcherRepository(RepositoryBase):
 
     def insertResearcher(self, uuid, currentAlias, xmlKey, xmlMdate, xmlItem, names, affiliations):
         # I should put a uuid5 because when I cascade all data, a uuid i duplicated
