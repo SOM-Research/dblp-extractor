@@ -87,9 +87,12 @@ class DataBaseInserts():
 
     def relatePublicationsWithAuthors(self, publication, authors, repoResercher):
         position = 1
-        for author in authors:
-            print(author)
-            researcher = repoResercher.getOneByName(author)
-            researcher.publications.append(Authorship(researcher=researcher, publication=publication, position=position))
-            repoResercher.updateResearcher(researcher)
-            position += 1
+        if publication is not None:
+            for author in authors:
+                researcher = repoResercher.getOneByName(author)
+                if researcher is not None:
+                    researcher.publications.append(Authorship(researcher=researcher, publication=publication, position=position))
+                    repoResercher.updateResearcher(researcher)
+                else:
+                    print('Author %s not in DB' % author)
+                position += 1

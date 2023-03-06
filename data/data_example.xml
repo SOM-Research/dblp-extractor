@@ -175,8 +175,53 @@
         <ee>https://doi.org/10.1007/s11280-006-0011-8</ee>
         <url>db/journals/www/www10.html#MenasceA07</url>
     </article>
-
-
-
-
+    <www mdate="2019-10-02" key="homepages/44/3953">
+        <author>Jerzy Konorski</author>
+        <title>Home Page</title>
+        <url>https://orcid.org/0000-0002-3091-1628</url>
+    </www>
+    <www mdate="2009-06-09" key="homepages/55/2019">
+        <author>Piotr Pacyna</author>
+        <title>Home Page</title>
+    </www>
+    <www mdate="2009-06-09" key="homepages/08/1258">
+        <author>Grzegorz Kolaczek</author>
+        <title>Home Page</title>
+    </www>
+    <www mdate="2022-11-07" key="homepages/84/1790">
+        <author>Zbigniew Kotulski</author>
+        <title>Home Page</title>
+        <url>https://scholar.google.com/citations?user=MZ_6GXYAAAAJ</url>
+        <url>https://zbmath.org/authors/?q=ai:kotulski.zbigniew</url>
+        <url>https://mathgenealogy.org/id.php?id=234593</url>
+        <url>https://orcid.org/0000-0002-1149-7863</url>
+        <url>https://www.wikidata.org/entity/Q62057192</url>
+        <url>https://mathscinet.ams.org/mathscinet/MRAuthorID/105480</url>
+    </www>
+    <www mdate="2022-06-10" key="homepages/77/3368">
+        <author>Krzysztof Cabaj</author>
+        <title>Home Page</title>
+        <url>https://orcid.org/0000-0002-5955-5890</url>
+        <url>https://www.wikidata.org/entity/Q100591448</url>
+    </www>
+    <www mdate="2012-03-20" key="homepages/35/11083">
+        <author>Pawel Szalachowski</author>
+        <title>Home Page</title>
+    </www>
+    <article mdate="2021-10-14" key="journals/ijtmcc/KonorskiPKKCS13">
+        <author>Jerzy Konorski</author>
+        <author>Piotr Pacyna</author>
+        <author>Grzegorz Kolaczek</author>
+        <author orcid="0000-0002-1149-7863">Zbigniew Kotulski</author>
+        <author orcid="0000-0002-5955-5890">Krzysztof Cabaj</author>
+        <author>Pawel Szalachowski</author>
+        <title>Theory and implementation of a virtualisation level Future Internet defence in depth architecture.</title>
+        <pages>274-299</pages>
+        <year>2013</year>
+        <volume>1</volume>
+        <journal>Int. J. Trust. Manag. Comput. Commun.</journal>
+        <number>3/4</number>
+        <ee>https://doi.org/10.1504/IJTMCC.2013.056431</ee>
+        <url>db/journals/ijtmcc/ijtmcc1.html#KonorskiPKKCS13</url>
+    </article>
 </list>
