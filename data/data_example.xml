@@ -1,0 +1,153 @@
+<list>
+
+    <www mdate="2021-12-17" key="homepages/308/9816">
+        <author>Ana Harumi Grota Suzuki</author>
+        <title>Home Page</title>
+    </www>
+
+    <www mdate="2021-12-07" key="homepages/308/1161">
+        <author>Joey &#214;hman</author>
+        <title>Home Page</title>
+    </www>
+
+    <www mdate="2020-07-16" key="homepages/178/5243">
+        <author>Kimmo Leppanen</author>
+        <author>Kimmo Lepp&#228;nen</author>
+        <title>Home Page</title>
+    </www>
+
+    <www mdate="2022-04-13" key="homepages/308/9859">
+        <author>Anton H. van den Boogaard</author>
+        <author>Ton van den Boogaard</author>
+        <title>Home Page</title>
+        <note type="affiliation">University of Twente, The Netherlands</note>
+    </www>
+    <www mdate="2021-12-14" key="homepages/308/5434">
+        <author>Ruoyu Wang 0024</author>
+        <title>Home Page</title>
+        <note type="affiliation">Northeastern University, Software College, Shenyang, China</note>
+        <url>https://orcid.org/0000-0003-4623-6724</url>
+    </www>
+    <www mdate="2022-03-18" key="homepages/308/0845">
+        <author>Yifang Wang 0006</author>
+        <title>Home Page</title>
+        <note type="affiliation">Sun Yat-Sen University, School of Aeronautics and Astronautics, Shenzhen, China</note>
+        <url>https://orcid.org/0000-0003-4016-4547</url>
+    </www>
+
+    <www mdate="2021-12-09" key="homepages/308/0540">
+        <author>David Nunez 0003</author>
+        <title>Home Page</title>
+        <note type="affiliation">Pompeu Fabra University, Barcelona, Spain</note>
+    </www>
+
+    <www mdate="2022-11-27" key="homepages/s/MadhuSudan">
+        <author>Madhu Sudan 0001</author>
+        <title>Home Page</title>
+        <note type="affiliation">Harvard University, School of Engineering and Applied Sciences, Boston, MA, USA</note>
+        <note type="affiliation">Microsoft Research New England, Cambridge, MA, USA</note>
+        <note label="2001" type="award">G&#246;del Prize</note>
+        <url>https://madhu.seas.harvard.edu/</url>
+        <url>https://scholar.google.com/citations?user=D-RwB3YAAAAJ</url>
+        <url>https://dl.acm.org/profile/81336493145</url>
+        <url>https://zbmath.org/authors/?q=ai:sudan.madhu</url>
+        <url>https://mathgenealogy.org/id.php?id=72850</url>
+        <url>https://en.wikipedia.org/wiki/Madhu_Sudan</url>
+        <url>https://orcid.org/0000-0003-3718-6489</url>
+        <url>https://www.wikidata.org/entity/Q93149</url>
+        <url>http://isni.org/isni/0000000117568258</url>
+        <url>https://viaf.org/viaf/32154680</url>
+        <url>https://id.loc.gov/authorities/names/n95119284</url>
+        <url>https://d-nb.info/gnd/1103857258</url>
+        <url>https://mathscinet.ams.org/mathscinet/MRAuthorID/325508</url>
+    </www>
+    <www mdate="2010-11-27" key="homepages/s/SanemSariel">
+        <crossref>homepages/17/8399</crossref>
+    </www>
+
+    <www mdate="2021-12-14" key="homepages/308/4713">
+        <author>Qingfu Zhang 0003</author>
+        <title>Home Page</title>
+        <note type="affiliation">Third Research Institute of the Ministry of Public Security, Shanghai, China</note>
+    </www>
+    <www mdate="2021-12-09" key="homepages/308/0531">
+        <author>Luca Ferrari 0006</author>
+        <title>Home Page</title>
+        <note type="affiliation">University of Pavia, Department of Electrical, Computer and Biomedical Engineering, Italy</note>
+    </www>
+    <www mdate="2021-12-15" key="homepages/308/6324">
+        <author>Mahmudul Hasan 0013</author>
+        <title>Home Page</title>
+        <note type="affiliation">Military Institute of Science and Technology (MIST), Dhaka, Bangladesh</note>
+    </www>
+
+    <www mdate="2022-06-14" key="homepages/315/0819-1">
+        <crossref>homepages/s/MadhuSudan</crossref>
+    </www>
+
+    <www mdate="2019-09-10" key="homepages/17/8399">
+        <author>Sanem Sariel</author>
+        <author>Sanem Sariel Talay</author>
+        <title>Home Page</title>
+        <note type="affiliation">Istanbul Technical University, Turkey</note>
+        <url>http://web.itu.edu.tr/~sariel/</url>
+        <url>https://orcid.org/0000-0003-2993-6681</url>
+    </www>
+
+
+    <www mdate="2022-12-18" key="homepages/178/6497">
+        <author>Georg Loho</author>
+        <title>Home Page</title>
+        <note type="affiliation">University of Twente, The Netherlands</note>
+        <url>https://orcid.org/0000-0001-6500-385X</url>
+    </www>
+
+
+    <www mdate="2022-05-25" key="homepages/180/8148">
+        <author>Justin Fong</author>
+        <title>Home Page</title>
+        <url>https://orcid.org/0000-0002-8172-470X</url>
+        <url>https://www.wikidata.org/entity/Q87968930</url>
+        <note type="affiliation">University of Melbourne, Parkville, Victoria, Australia</note>
+    </www>
+    <www mdate="2020-08-15" key="homepages/180/5761">
+        <author>Brandon Haynes</author>
+        <title>Home Page</title>
+        <note type="affiliation">University of Washington, Seattle, WA, USA</note>
+        <url>https://brandonhaynes.org/</url>
+        <url>https://scholar.google.com/citations?user=lEWpgi8AAAAJ</url>
+    </www>
+    <www mdate="2020-10-06" key="homepages/180/9612">
+        <author>Alastair G. Reid</author>
+        <title>Home Page</title>
+        <note type="affiliation">University of Bristol, UK</note>
+        <note type="affiliation">Imperial College London, UK</note>
+        <note type="affiliation">Hammersmith Hospital, London, UK</note>
+    </www>
+    <www mdate="2019-04-02" key="homepages/180/8326">
+        <author>Alessio Gagliardi</author>
+        <title>Home Page</title>
+        <note type="affiliation">Technical University Munich, Germany</note>
+        <url>https://www.ei.tum.de/struktur-und-profil/personen/professoren/gagliardi/</url>
+    </www>
+    <www mdate="2020-03-19" key="homepages/180/0006">
+        <author>Cornelis C. de Visser</author>
+        <author>Coen C. de Visser</author>
+        <title>Home Page</title>
+        <note type="affiliation">Delft University of Technology, The Netherlands</note>
+        <url>https://orcid.org/0000-0002-4653-0002</url>
+        <url>https://www.wikidata.org/entity/Q86256084</url>
+    </www>
+
+    <www mdate="2019-10-15" key="homepages/180/1182">
+<author>Hosna Tashakkori</author>
+<author>Seyedeh Hosna Tashakkori Hashemi</author>
+<title>Home Page</title>
+<note type="affiliation">University of Melbourne, Parkville, Victoria, Australia</note>
+<url>https://orcid.org/0000-0003-2410-8545</url>
+</www>
+
+
+
+
+</list>

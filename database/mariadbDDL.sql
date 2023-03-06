@@ -2,30 +2,46 @@ DROP DATABASE IF EXISTS metascience;
 CREATE DATABASE metascience;
 use metascience;
 
-CREATE TABLE Researcher (
-    id varchar(255) PRIMARY KEY ,
-    currentAlias varchar(255),
-    xmlKey VARCHAR(255),
-    xmlMdate DATE,
-    xmlItem LONGTEXT
+CREATE TABLE researchers (
+    id UUID PRIMARY KEY,
+    current_alias varchar(255),
+    xml_key VARCHAR(255),
+    xml_mdate DATE,
+    xml_item LONGTEXT
 );
 
-CREATE TABLE ResearcherName(
-    researcherId VARCHAR(255),
+CREATE INDEX r_xml_keys_index ON researchers(xml_key);
+
+CREATE TABLE researcher_xml_keys(
+    researcher_id UUID,
+    xml_key VARCHAR(255),
+    CONSTRAINT PK_researcher_xml_keys PRIMARY KEY (researcher_id,xml_key),
+    FOREIGN KEY (researcher_id) REFERENCES researchers(id)
+);
+
+CREATE TABLE researcher_names(
+    researcher_id UUID,
     name VARCHAR(255),
-    CONSTRAINT PK_Researcher_Name PRIMARY KEY (researcherId,name),
-    FOREIGN KEY (researcherId) REFERENCES Researcher(id)
+    CONSTRAINT PK_researcher_names PRIMARY KEY (researcher_id,name),
+    FOREIGN KEY (researcher_id) REFERENCES researchers(id)
 );
 
-CREATE TABLE PublicationVenue(
-    id VARCHAR(255) PRIMARY KEY,
+CREATE INDEX r_names_names_index ON researcher_names(name);
+
+
+ALTER TABLE researcher_names CHARACTER SET utf8 COLLATE utf8_bin;
+ALTER TABLE researcher_names CONVERT TO CHARACTER SET utf8 COLLATE utf8_bin;
+
+CREATE TABLE publication_venues(
+    id UUID PRIMARY KEY,
+    name VARCHAR(255),
     type ENUM('journal', 'conference')
 );
 
-CREATE TABLE PublicationGroup(
+CREATE TABLE publication_groups(
     id varchar(255) PRIMARY KEY,
     title varchar(255),
-    publicationVenue VARCHAR(255),
+    publication_venue UUID,
     publisher varchar(255),
     year int,
     isbn varchar(255),
@@ -33,59 +49,61 @@ CREATE TABLE PublicationGroup(
     serie varchar(255),
     volume int,
     number int,
-    xmlKey VARCHAR(255),
-    xmlMdate DATE,
-    xmlItem LONGTEXT,
-    FOREIGN KEY (publicationVenue) REFERENCES PublicationVenue(id)
+    xml_key VARCHAR(255),
+    xml_mdate DATE,
+    xml_item LONGTEXT,
+    FOREIGN KEY (publication_venue) REFERENCES publication_venues(id)
 );
 
-CREATE TABLE Publication(
+CREATE TABLE publications(
     id varchar(255) PRIMARY KEY,
     type ENUM('article','thesis'),
-    publicationGroup VARCHAR(255),
+    publication_group VARCHAR(255),
     title varchar(255),
     year int,
     doi varchar(255),
     pages varchar(255),
-    numPages int,
-    xmlKey VARCHAR(255),
-    xmlMdate DATE,
-    xmlItem LONGTEXT,
-    FOREIGN KEY (publicationGroup) REFERENCES PublicationGroup(id)
+    num_pages int,
+    xml_key VARCHAR(255),
+    xml_mdate DATE,
+    xml_item LONGTEXT,
+    FOREIGN KEY (publication_group) REFERENCES publication_groups(id)
 );
 
-CREATE TABLE PublicationEE(
-    publicationId VARCHAR(255),
-    electronicEdition VARCHAR(255),
-    CONSTRAINT PK_Publication_EE PRIMARY KEY (publicationId,electronicEdition),
-    FOREIGN KEY (publicationId) REFERENCES Publication(id)
+CREATE TABLE publication_electronic_editions(
+    publication_id VARCHAR(255),
+    electronic_edition VARCHAR(255),
+    CONSTRAINT PK_publication_electronic_editions PRIMARY KEY (publication_id,electronic_edition),
+    FOREIGN KEY (publication_id) REFERENCES publications(id)
 );
 
-CREATE TABLE Authorship(
-    researcherId VARCHAR(255),
-    publicationId VARCHAR(255),
+CREATE TABLE authorships(
+    researcher_id UUID,
+    publication_id VARCHAR(255),
     position int,
-    CONSTRAINT PK_Authorship PRIMARY KEY (researcherId,publicationId),
-    FOREIGN KEY (researcherId) REFERENCES Researcher(id),
-    FOREIGN KEY (publicationId) REFERENCES Publication(id)
+    CONSTRAINT PK_authorships PRIMARY KEY (researcher_id,publication_id),
+    FOREIGN KEY (researcher_id) REFERENCES researchers(id),
+    FOREIGN KEY (publication_id) REFERENCES publications(id)
 );
 
-CREATE TABLE PublicationGroupEE(
-    publicationGroupId VARCHAR(255),
-    electronicEdition VARCHAR(255),
-    CONSTRAINT PK_PublicationGroup_EE PRIMARY KEY (publicationGroupId,electronicEdition),
-    FOREIGN KEY (publicationGroupId) REFERENCES PublicationGroup(id)
+CREATE TABLE publication_group_electronic_editions(
+    publication_group_id VARCHAR(255),
+    electronic_edition VARCHAR(255),
+    CONSTRAINT PK_publication_group_electronic_editions PRIMARY KEY (publication_group_id,electronic_edition),
+    FOREIGN KEY (publication_group_id) REFERENCES publication_groups(id)
 );
 
-CREATE TABLE Institution(
-    id VARCHAR(255) PRIMARY KEY,
-    name VARCHAR(255)
+CREATE TABLE institutions(
+    id UUID PRIMARY KEY,
+    name LONGTEXT
 );
 
-CREATE TABLE affiliation(
-    researcherId VARCHAR(255),
-    institutionId VARCHAR(255),
-    CONSTRAINT PK_Affiliation PRIMARY KEY (researcherId, institutionId),
-    FOREIGN KEY (researcherId) REFERENCES Researcher(id),
-    FOREIGN KEY (institutionId) REFERENCES Institution(id)
+CREATE INDEX institution_names_index ON institutions(name);
+
+CREATE TABLE affiliations(
+    researcher_id UUID,
+    institution_id UUID,
+    CONSTRAINT PK_Affiliation PRIMARY KEY (researcher_id, institution_id),
+    FOREIGN KEY (researcher_id) REFERENCES researchers(id),
+    FOREIGN KEY (institution_id) REFERENCES institutions(id)
 )
