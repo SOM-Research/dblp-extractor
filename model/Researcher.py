@@ -1,9 +1,8 @@
 from typing import List
-
-from sqlalchemy import Column, String, ForeignKey, UUID, DATE, Text, Table
+from sqlalchemy import Column, String, ForeignKey, UUID, DATE, Text, Table, Integer
 from sqlalchemy.orm import relationship, Mapped
-
 from model import ModelBase
+from model.Authorship import Authorship
 
 affiliation = Table(
     "affiliations",
@@ -12,8 +11,6 @@ affiliation = Table(
     Column("institution_id", ForeignKey("institutions.id"), primary_key=True),
 )
 
-
-# an example mapping using the base
 class Researcher(ModelBase):
     __tablename__ = "researchers"
 
@@ -25,3 +22,4 @@ class Researcher(ModelBase):
     xml_cross_reference: Mapped[List["XmlKey"]] = relationship(back_populates="researcher")
     names: Mapped[List["ResearcherName"]] = relationship(back_populates="researcher")
     affiliations: Mapped[List["Institution"]] = relationship(secondary=affiliation)
+    publications: Mapped[List["Authorship"]] = relationship(back_populates="researcher")

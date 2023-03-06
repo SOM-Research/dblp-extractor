@@ -1,12 +1,10 @@
 import argparse
-import os
-
 import xml.etree.ElementTree as ET
 import Parser
 import time
-
 from database.DataBaseConnection import DataBaseConnection
 from database.orm.InstitutionRepository import InstitutionRepository
+from database.orm.PublicationRepository import PublicationRepository
 from database.orm.ResearcherRepository import ResearcherRepository
 from extractor.DataBaseInserts import DataBaseInserts
 
@@ -30,18 +28,24 @@ def splitXml(tree):
         file.write(bytes('</list>', 'ascii'))
         file.close()
 
-def inserts(tree, dbInserts, repoR, repoI):
+def inserts(tree, dbInserts, repoR, repoI, repoP):
     rCrossRef = {}
+    authorshipArray = []
     for item in tree.getroot():
         if item.tag == "www":
             result = dbInserts.insertResearcher(item, repoR, repoI)
             if result is not None and len(result) == 2:
                 rCrossRef[result["r_cross_ref"]] = result["r_key"]
+        if item.tag == "article":
+            result = dbInserts.insertPublications(item, repoP)
+            authorshipArray.append(result)
         item.clear()
 
     print("Totals:")
     for key in rCrossRef:
         dbInserts.insertKeyFromCrossRef(key, rCrossRef[key], repoR)
+    for authorship in authorshipArray:
+        dbInserts.relatePublicationsWithAuthors(authorship['publication'], authorship['authorship'], repoR)
 
 
 
@@ -62,12 +66,10 @@ dbConnection = DataBaseConnection()
 if args.ddl is not None:
     dbConnection.createDatabaseFromDDL(args.ddl)
 
-cwd = os.getcwd()
-print(cwd)
-
 session = dbConnection.alchemySession()
 repoR = ResearcherRepository(session)
 repoI = InstitutionRepository(session)
+repoP = PublicationRepository(session)
 
 dbInserts = DataBaseInserts(session)
 
@@ -76,7 +78,7 @@ if args.xml is not None:
     if args.splitXml is True:
         splitXml(tree)
     if args.insert is True:
-        inserts(tree, dbInserts, repoR, repoI)
+        inserts(tree, dbInserts, repoR, repoI, repoP)
 
 
 print('TIME: ', time.time() - strTime)

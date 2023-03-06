@@ -140,12 +140,41 @@
     </www>
 
     <www mdate="2019-10-15" key="homepages/180/1182">
-<author>Hosna Tashakkori</author>
-<author>Seyedeh Hosna Tashakkori Hashemi</author>
-<title>Home Page</title>
-<note type="affiliation">University of Melbourne, Parkville, Victoria, Australia</note>
-<url>https://orcid.org/0000-0003-2410-8545</url>
-</www>
+        <author>Hosna Tashakkori</author>
+        <author>Seyedeh Hosna Tashakkori Hashemi</author>
+        <title>Home Page</title>
+        <note type="affiliation">University of Melbourne, Parkville, Victoria, Australia</note>
+        <url>https://orcid.org/0000-0003-2410-8545</url>
+    </www>
+
+    <www mdate="2009-06-09" key="homepages/28/2059">
+        <author>Vasudeva Akula</author>
+        <title>Home Page</title>
+    </www>
+
+    <www mdate="2020-05-20" key="homepages/m/DAMenasce">
+        <author>Daniel A. Menasc&#233;</author>
+        <title>Home Page</title>
+        <url>http://cs.gmu.edu/faculty/menasce.html</url>
+        <url>https://scholar.google.com/citations?user=ONloO5IAAAAJ</url>
+        <url>https://dl.acm.org/profile/81100651273</url>
+        <url>https://en.wikipedia.org/wiki/Daniel_Menasce</url>
+        <url>https://orcid.org/0000-0002-4085-6212</url>
+        <url>https://www.wikidata.org/entity/Q29358035</url>
+        <note type="affiliation">George Mason University</note>
+    </www>
+
+    <article mdate="2017-05-23" key="conf/www/MenasceA07">
+        <author>Daniel A. Menasc&#233;</author>
+        <author>Vasudeva Akula</author>
+        <title>Improving the Performance of Online Auctions Through Server-side Activity-based Caching.</title>
+        <pages>181-204</pages>
+        <year>2007</year>
+        <journal>World Wide Web</journal>
+        <number>2</number>
+        <ee>https://doi.org/10.1007/s11280-006-0011-8</ee>
+        <url>db/journals/www/www10.html#MenasceA07</url>
+    </article>
 
 
 

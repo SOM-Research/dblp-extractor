@@ -39,7 +39,7 @@ CREATE TABLE publication_venues(
 );
 
 CREATE TABLE publication_groups(
-    id varchar(255) PRIMARY KEY,
+    id UUID PRIMARY KEY,
     title varchar(255),
     publication_venue UUID,
     publisher varchar(255),
@@ -56,9 +56,9 @@ CREATE TABLE publication_groups(
 );
 
 CREATE TABLE publications(
-    id varchar(255) PRIMARY KEY,
+    id UUID PRIMARY KEY,
     type ENUM('article','thesis'),
-    publication_group VARCHAR(255),
+    publication_group UUID,
     title varchar(255),
     year int,
     doi varchar(255),
@@ -71,7 +71,7 @@ CREATE TABLE publications(
 );
 
 CREATE TABLE publication_electronic_editions(
-    publication_id VARCHAR(255),
+    publication_id UUID,
     electronic_edition VARCHAR(255),
     CONSTRAINT PK_publication_electronic_editions PRIMARY KEY (publication_id,electronic_edition),
     FOREIGN KEY (publication_id) REFERENCES publications(id)
@@ -79,7 +79,7 @@ CREATE TABLE publication_electronic_editions(
 
 CREATE TABLE authorships(
     researcher_id UUID,
-    publication_id VARCHAR(255),
+    publication_id UUID,
     position int,
     CONSTRAINT PK_authorships PRIMARY KEY (researcher_id,publication_id),
     FOREIGN KEY (researcher_id) REFERENCES researchers(id),
@@ -87,7 +87,7 @@ CREATE TABLE authorships(
 );
 
 CREATE TABLE publication_group_electronic_editions(
-    publication_group_id VARCHAR(255),
+    publication_group_id UUID,
     electronic_edition VARCHAR(255),
     CONSTRAINT PK_publication_group_electronic_editions PRIMARY KEY (publication_group_id,electronic_edition),
     FOREIGN KEY (publication_group_id) REFERENCES publication_groups(id)

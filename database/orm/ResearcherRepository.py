@@ -38,3 +38,6 @@ class ResearcherRepository(RepositoryBase):
         stmt = select(Researcher).where(Researcher.xml_key == xmlKey)
         result = self.session.scalars(stmt)
         return result.first()
+
+    def getOneByName(self, name):
+        return self.session.query(Researcher).join(ResearcherName).filter(ResearcherName.name == name).first()
