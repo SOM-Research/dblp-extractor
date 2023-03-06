@@ -1,4 +1,5 @@
 from typing import List
+import re
 from sqlalchemy import Column, String, ForeignKey, UUID, DATE, Text, Table, Integer
 from sqlalchemy.orm import relationship, Mapped
 from model import ModelBase
@@ -16,6 +17,7 @@ class Researcher(ModelBase):
 
     id = Column(UUID, primary_key=True)
     current_alias = Column(String)
+    orcid = Column(String)
     xml_key = Column(String)
     xml_mdate = Column(DATE)
     xml_item = Column(Text)
@@ -23,3 +25,13 @@ class Researcher(ModelBase):
     names: Mapped[List["ResearcherName"]] = relationship(back_populates="researcher")
     affiliations: Mapped[List["Institution"]] = relationship(secondary=affiliation)
     publications: Mapped[List["Authorship"]] = relationship(back_populates="researcher")
+
+    def addOrcid(self, orcid):
+        orcidRegEx = re.compile('([0-9][0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]-[0-9][0-9][0-9]([0-9]|X))')
+        orcidPath = re.compile('https://orcid\.org/.*')
+        if orcidRegEx.match(orcid):
+            self.orcid = orcid
+            return orcid
+        if orcidPath.match(orcid):
+            self.orcid = re.search(orcidRegEx, orcid).group(1)
+            return self.orcid

@@ -18,13 +18,17 @@ class DataBaseInserts():
         names = []
         aff = []
         institutions = []
+        orcid = None
         crossRef = None
+
         for child in item.iter():
             if child.tag == "crossref":
                 crossRef = child.text
             if child.tag == "author":
                 if child.text not in names:
                     names.append(child.text)
+            if child.tag == "url":
+                orcid = child.text
             if child.tag == "note":
                 if child.attrib.get('type') == "affiliation":
                     institutions.append(child.text)
@@ -37,15 +41,14 @@ class DataBaseInserts():
                         institutionNotSaved += 1
                         print("Intsitution not saved: ", child.text)
                         print("Total institutions not saved: ", institutionNotSaved)
+
         if crossRef is not None:
             return {"r_key": key, "r_cross_ref": crossRef}
-
-
         name = key
         if len(names) > 0:
             name = names[0]
         try:
-            researcher = repoResearcher.insertResearcher(id, name, key, mdate, xmlItem, names, aff)
+            researcher = repoResearcher.insertResearcher(id, name, orcid, key, mdate, xmlItem, names, aff)
             return {"researcher": researcher}
         except:
             print("Error insert research -> id: ", id, " | name: ", name, " | key: ", key)

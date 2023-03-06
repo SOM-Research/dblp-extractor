@@ -6,9 +6,11 @@ from sqlalchemy import select
 
 class ResearcherRepository(RepositoryBase):
 
-    def insertResearcher(self, uuid, currentAlias, xmlKey, xmlMdate, xmlItem, names, affiliations):
+    def insertResearcher(self, uuid, currentAlias, orcid, xmlKey, xmlMdate, xmlItem, names, affiliations):
         # I should put a uuid5 because when I cascade all data, a uuid i duplicated
         researcher = Researcher(id=uuid, current_alias=currentAlias, xml_key=xmlKey, xml_mdate=xmlMdate, xml_item=xmlItem)
+        if orcid is not None:
+            researcher.addOrcid(orcid)
 
         for name in names:
             researcherName = ResearcherName(researcher_id=researcher.id, name=name)
