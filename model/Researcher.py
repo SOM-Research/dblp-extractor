@@ -1,9 +1,8 @@
 from typing import List
 import re
-from sqlalchemy import Column, String, ForeignKey, UUID, DATE, Text, Table, Integer
+from sqlalchemy import Column, String, ForeignKey, UUID, DATE, Text, Table
 from sqlalchemy.orm import relationship, Mapped
 from model import ModelBase
-from model.Authorship import Authorship
 
 affiliation = Table(
     "affiliations",

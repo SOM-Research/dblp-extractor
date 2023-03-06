@@ -1,7 +1,7 @@
 from uuid import uuid4
 import xml.etree.ElementTree as ET
 from model.Publication import PublicationType
-from model.Researcher import Authorship
+from model.Authorship import Authorship
 from model.XmlKey import XmlKey
 
 class DataBaseInserts():
@@ -71,7 +71,7 @@ class DataBaseInserts():
         numAuthors = 1
         for child in item.iter():
             if child.tag == "author":
-                authors[child.text] = numAuthors
+                authors[child.text] = {'position': numAuthors, 'orcid': child.attrib.get('orcid')}
                 numAuthors += 1
             if child.tag == "title":
                 title = child.text
@@ -89,13 +89,13 @@ class DataBaseInserts():
             print("Error insert publication -> id: ", id, " | title: ", title, " | key: ", key)
 
     def relatePublicationsWithAuthors(self, publication, authors, repoResercher):
-        position = 1
         if publication is not None:
             for author in authors:
                 researcher = repoResercher.getOneByName(author)
                 if researcher is not None:
-                    researcher.publications.append(Authorship(researcher=researcher, publication=publication, position=position))
+                    if authors[author]['orcid'] is not None and researcher.orcid is None:
+                        researcher.addOrcid(authors[author]['orcid'])
+                    researcher.publications.append(Authorship(researcher=researcher, publication=publication, position=authors[author]['position']))
                     repoResercher.updateResearcher(researcher)
                 else:
                     print('Author %s not in DB' % author)
-                position += 1

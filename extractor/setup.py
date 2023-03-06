@@ -1,10 +1,10 @@
 import argparse
+from database.orm.PublicationRepository import PublicationRepository
 import xml.etree.ElementTree as ET
 import Parser
 import time
 from database.DataBaseConnection import DataBaseConnection
 from database.orm.InstitutionRepository import InstitutionRepository
-from database.orm.PublicationRepository import PublicationRepository
 from database.orm.ResearcherRepository import ResearcherRepository
 from extractor.DataBaseInserts import DataBaseInserts
 
