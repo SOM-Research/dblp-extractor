@@ -38,7 +38,7 @@ DBLP is an open bibliographic information on major computer science journals and
     
     This is to create and insert database: 
     ```console
-    python extractor/setup.py --ddl "../database/mariadbDDL.sql" --xml "../data/data_example.xml --insert True"
+    python extractor/setup.py --ddl "../database/mariadbDDL.sql" --xml "../data/data_example.xml" --insert True
     ```
 
     This is to split the xml:
