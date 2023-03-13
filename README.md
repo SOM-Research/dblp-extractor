@@ -38,16 +38,16 @@ name (now *metascience*) is changed; should be changed in ddl file as well.
 
 This is to only creates database:
 ```console
-python extractor/setup.py --ddl "../database/mariadbDDL.sql" --xml "../data/data_example.xml"
+python extractor/setup.py --ddl "./database/mariadbDDL.sql" --xml "./data/data_example.xml"
 ```
 
 This is to create and insert database: 
 ```console
-python extractor/setup.py --ddl "../database/mariadbDDL.sql" --xml "../data/data_example.xml --insert True"
+python extractor/setup.py --ddl "./database/mariadbDDL.sql" --xml "./data/data_example.xml --insert True"
 ```
 This is to split the xml:
 ```console
-python extractor/setup.py  --xml "../data/data_example.xml --splitXml True"
+python extractor/setup.py  --xml "./data/data_example.xml --splitXml True"
 ```
 
 If the four parameters are applied, the inserts are from original xml, and not for 

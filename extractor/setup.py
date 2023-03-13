@@ -16,7 +16,7 @@ def rawData(file):
     return tree
 
 def splitXml(tree):
-    baseFilesPath = '../data/split_%s.xml'
+    baseFilesPath = './data/split_%s.xml'
     xmlFiles = {}
     for item in tree.getroot():
         if item.tag not in xmlFiles:
