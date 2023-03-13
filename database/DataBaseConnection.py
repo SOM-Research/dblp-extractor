@@ -11,7 +11,7 @@ class DataBaseConnection():
         self.session = None
 
     def config(self):
-        configFile = open("../config/config.yaml", "r")
+        configFile = open("./config/config.yaml", "r")
         return yaml.load(configFile, yaml.Loader)
 
     def connection(self):
