@@ -58,33 +58,42 @@ class DataBaseInserts():
         r.xml_cross_reference.append(XmlKey(researcher_id=r.id, xml_key=crosRef))
         repoResercher.updateResearcher(r)
 
-    def insertPublications(self, item, repoPublication):
+    def insertPublicationsAsArticle(self, item, repoPublication):
         key = item.attrib.get('key')
         mdate = item.attrib.get('mdate')
         xmlItem = ET.tostring(item)
-        title = ""
-        year = 0
-        pages = ""
         id = uuid4()
+        title = None
+        year = None
+        pages = None
         ee = []
         authors = {}
         numAuthors = 1
+        pubGroup = {}
         for child in item.iter():
-            if child.tag == "author":
+            if child.tag == 'author':
                 authors[child.text] = {'position': numAuthors, 'orcid': child.attrib.get('orcid')}
                 numAuthors += 1
-            if child.tag == "title":
+            if child.tag == 'title':
                 title = child.text
-            if child.tag == "year":
+            if child.tag == 'year':
                 year = int(child.text)
-            if child.tag == "pages":
+            if child.tag == 'pages':
                 pages = child.text
-            if child.tag == "ee":
+            if child.tag == 'ee':
                 ee.append(child.text)
+            if child.tag == 'journal':
+                pubGroup['has'] = True
+                pubGroup['type'] = child.tag
+                pubGroup[child.tag] = child.text
+            if child.tag == 'year':
+                pubGroup[child.tag] = int(child.text)
+            if child.tag == 'volume':
+                pubGroup[child.tag] = int(child.text)
 
         try:
-            publication = repoPublication.insertPublication(id, PublicationType.article, title, year, "doi", pages, key, mdate, xmlItem, ee)
-            return {"publication": publication, "authorship": authors}
+            publication = repoPublication.insertPublication(id, title, year, pages, key, mdate, xmlItem, ee)
+            return {"publication": publication, "authorship": authors, 'publication_group': pubGroup}
         except:
             print("Error insert publication -> id: ", id, " | title: ", title, " | key: ", key)
 
@@ -99,3 +108,85 @@ class DataBaseInserts():
                     repoResercher.updateResearcher(researcher)
                 else:
                     print('Author %s not in DB' % author)
+
+    def insertPublicationInConf(self, item, repoP):
+        key = item.attrib.get('key')
+        mdate = item.attrib.get('mdate')
+        xmlItem = ET.tostring(item)
+        id = uuid4()
+        title = None
+        year = None
+        pages = None
+        ee = []
+        authors = {}
+        numAuthors = 1
+        pubGroup = {}
+        for child in item.iter():
+            if child.tag == 'author':
+                authors[child.text] = {'position': numAuthors, 'orcid': child.attrib.get('orcid')}
+                numAuthors += 1
+            if child.tag == 'title':
+                title = child.text
+            if child.tag == 'year':
+                year = int(child.text)
+            if child.tag == 'pages':
+                pages = child.text
+            if child.tag == 'ee':
+                ee.append(child.text)
+            if child.tag == 'crossref':
+                pubGroup['has'] = True
+                pubGroup[child.tag] = child.text
+            if child.tag == 'booktitle':
+                pubGroup['has'] = True
+                pubGroup[child.tag] = child.text
+        try:
+            publication = repoP.insertPublication(id, title, year, pages, key, mdate, xmlItem, ee)
+            return {"publication": publication, "authorship": authors, 'publication_group': pubGroup}
+        except:
+            print("Error insert publication -> id: ", id, " | title: ", title, " | key: ", key)
+
+
+    def insertPublicationGroupFromXml(self, item, repoPG):
+        uuid = uuid4()
+        title = None
+        publisher = None
+        year = None
+        isbn = None
+        booktitle = None
+        serie = None
+        volume = None
+        number = None
+        xmlKey = item.attrib.get('key')
+        xmlMdate = item.attrib.get('mdate')
+        xmlItem = ET.tostring(item)
+        for child in item.iter():
+            if child.tag == "title":
+                title = child.text
+            if child.tag == "publisher":
+                publisher = child.text
+            if child.tag == "year":
+                year = int(child.text)
+            if child.tag == "isbn":
+                isbn = child.text
+            if child.tag == "booktitle":
+                booktitle = child.text
+            if child.tag == "serie":
+                serie = child.text
+            if child.tag == "volume":
+                volume = int(child.text)
+            if child.tag == "number":
+                number = child.text
+
+        return repoPG.insertPublicationGroup(uuid, title, publisher, year, isbn,  booktitle, serie, volume, number, xmlKey, xmlMdate, xmlItem)
+
+
+    def insertPublicationsGroupFromArticleResoult(self, data, repoPG):
+        uuid = uuid4()
+        title = data[data['type']]
+        year = None
+        volume = None
+        if 'year' in data:
+            year = data['year']
+        if 'volume' in data:
+            volume = data['volume']
+        repoPG.insertPublicationGroup(uuid, title, None, year, None, None, None, volume, None, None, None, None)

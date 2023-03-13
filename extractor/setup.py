@@ -1,11 +1,12 @@
 import argparse
-from database.orm.PublicationRepository import PublicationRepository
 import xml.etree.ElementTree as ET
 import Parser
 import time
 from database.DataBaseConnection import DataBaseConnection
 from database.orm.InstitutionRepository import InstitutionRepository
+from database.orm.PublicationRepository import PublicationRepository
 from database.orm.ResearcherRepository import ResearcherRepository
+from database.orm.PublicationGroupRepository import PublicationGroupRepository
 from extractor.DataBaseInserts import DataBaseInserts
 
 def rawData(file):
@@ -28,24 +29,38 @@ def splitXml(tree):
         file.write(bytes('</list>', 'ascii'))
         file.close()
 
-def inserts(tree, dbInserts, repoR, repoI, repoP):
+def inserts(tree, dbInserts, repoR, repoI, repoP, repoPG):
     rCrossRef = {}
-    authorshipArray = []
+    articleResoults = []
     for item in tree.getroot():
         if item.tag == "www":
             result = dbInserts.insertResearcher(item, repoR, repoI)
             if result is not None and len(result) == 2:
                 rCrossRef[result["r_cross_ref"]] = result["r_key"]
         if item.tag == "article":
-            result = dbInserts.insertPublications(item, repoP)
-            authorshipArray.append(result)
+            result = dbInserts.insertPublicationsAsArticle(item, repoP)
+            articleResoults.append(result)
+        if item.tag == "inproceedings":
+            result = dbInserts.insertPublicationInConf(item, repoP)
+            articleResoults.append(result)
+        if item.tag == "book" or item.tag == "proceedings":
+            dbInserts.insertPublicationGroupFromXml(item, repoPG)
         item.clear()
 
     print("Totals:")
     for key in rCrossRef:
         dbInserts.insertKeyFromCrossRef(key, rCrossRef[key], repoR)
-    for authorship in authorshipArray:
+    for authorship in articleResoults:
         dbInserts.relatePublicationsWithAuthors(authorship['publication'], authorship['authorship'], repoR)
+        if authorship['publication_group']['has'] == True:
+            if 'journal' in authorship['publication_group']:
+                pGroupTitle = authorship['publication_group']['journal']
+                if 'volume' in authorship['publication_group']:
+                    pGroup = repoPG.findByTitleAndVolume(pGroupTitle, authorship['publication_group']['volume'])
+                else:
+                    pGroup = repoPG.findByTitle(pGroupTitle)
+                if pGroup is None:
+                    pGroup = dbInserts.insertPublicationsGroupFromArticleResoult(authorship['publication_group'], repoPG)
 
 
 
@@ -70,6 +85,7 @@ session = dbConnection.alchemySession()
 repoR = ResearcherRepository(session)
 repoI = InstitutionRepository(session)
 repoP = PublicationRepository(session)
+repoPG = PublicationGroupRepository(session)
 
 dbInserts = DataBaseInserts(session)
 
@@ -78,7 +94,7 @@ if args.xml is not None:
     if args.splitXml is True:
         splitXml(tree)
     if args.insert is True:
-        inserts(tree, dbInserts, repoR, repoI, repoP)
+        inserts(tree, dbInserts, repoR, repoI, repoP, repoPG)
 
 
 print('TIME: ', time.time() - strTime)

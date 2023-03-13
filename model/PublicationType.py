@@ -1,5 +1,6 @@
 import enum
 
 class PublicationType(enum.Enum):
-    article = 'article'
+    journal = 'journal'
     thesis = 'thesis'
+    conference = 'conference'

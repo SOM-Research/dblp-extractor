@@ -49,7 +49,7 @@ CREATE TABLE publication_groups(
     booktitle varchar(255),
     serie varchar(255),
     volume int,
-    number int,
+    number varchar(255),
     xml_key VARCHAR(255),
     xml_mdate DATE,
     xml_item LONGTEXT,
@@ -58,7 +58,7 @@ CREATE TABLE publication_groups(
 
 CREATE TABLE publications(
     id UUID PRIMARY KEY,
-    type ENUM('article','thesis'),
+    type ENUM('journal','thesis', 'conference'),
     publication_group UUID,
     title varchar(255),
     year int,

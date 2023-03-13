@@ -22,6 +22,16 @@ class Publication(ModelBase):
     electronic_editions: Mapped[List["PublicationElectronicEdition"]] = relationship(back_populates="publication")
     authors: Mapped[List["Authorship"]] = relationship(back_populates="publication")
 
+    def setType(self):
+        word = self.xml_key.split('/')[0]
+        if 'journals' == word:
+            self.type = PublicationType.journal
+        if 'conf' == word:
+            self.type = PublicationType.conference
+        if 'phd' == word:
+            self.type = PublicationType.thesis
+        return self.type
+
     def calculatePages(self):
         if self.pages.isnumeric():
             self.num_pages = int(self.pages)

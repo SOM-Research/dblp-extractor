@@ -188,6 +188,85 @@
         <author>Grzegorz Kolaczek</author>
         <title>Home Page</title>
     </www>
+    <www mdate="2020-02-12" key="homepages/e/OEtzion">
+        <author>Opher Etzion</author>
+        <title>Home Page</title>
+        <note type="affiliation">IBM Research, Haifa, Israel</note>
+        <url>http://www.research.ibm.com/people/o/opher/</url>
+        <url>https://scholar.google.com/citations?user=P_xDmJ4AAAAJ</url>
+        <url>https://dl.acm.org/profile/81100346872</url>
+        <url>https://en.wikipedia.org/wiki/Opher_Etzion</url>
+        <url>https://www.wikidata.org/entity/Q16189038</url>
+        <url>http://isni.org/isni/0000000116262409</url>
+        <url>https://id.loc.gov/authorities/names/n98038478</url>
+    </www>
+    <www mdate="2020-02-12" key="homepages/s/PeterScheuermann">
+        <author>Peter Scheuermann</author>
+        <title>Home Page</title>
+        <note type="affiliation">Northwestern University, Illinois, USA</note>
+        <url>http://www.ece.northwestern.edu/~peters</url>
+        <url>https://scholar.google.com/citations?user=nvKQ7JQAAAAJ</url>
+        <url>https://dl.acm.org/profile/81100099073</url>
+    </www>
+    <www mdate="2009-06-09" key="homepages/00/536">
+        <author>Qiming Chen</author>
+        <title>Home Page</title>
+    </www>
+    <www mdate="2021-12-12" key="homepages/76/2198">
+        <author>Umeshwar Dayal</author>
+        <title>Home Page</title>
+        <note type="affiliation">Hitachi America, Ltd., Research &amp; Development Division</note>
+        <url>https://www.hitachi.com/rd/about/leaders_td/umeshwar_dayal/index.html</url>
+        <url>https://dl.acm.org/profile/81100599566</url>
+    </www>
+    <www mdate="2021-02-09" key="homepages/88/6921">
+        <author>David S. Doermann</author>
+        <title>Home Page</title>
+        <url>https://cse.buffalo.edu/~doermann/</url>
+        <url>https://scholar.google.com/citations?user=RoGOW9AAAAAJ</url>
+        <note type="affiliation">University at Buffalo</note>
+        <note label="former" type="affiliation">University of Maryland</note>
+    </www>
+    <www mdate="2009-06-10" key="homepages/20/5849">
+        <author>Karl Tombre</author>
+        <title>Home Page</title>
+    </www>
+    <www mdate="2011-11-10" key="homepages/17/10427">
+        <author>Shaik Sahil Babu</author>
+        <title>Home Page</title>
+    </www>
+    <www mdate="2020-04-03" key="homepages/69/10426">
+        <author>Arnab Raha</author>
+        <title>Home Page</title>
+        <url>https://orcid.org/0000-0002-8848-1069</url>
+        <note type="affiliation">Intel Corporation, Santa Clara, CA, USA</note>
+    </www>
+    <www mdate="2022-11-07" key="homepages/18/5116">
+        <author>Omar Alfandi</author>
+        <title>Home Page</title>
+        <url>https://orcid.org/0000-0002-9581-401X</url>
+        <url>https://www.wikidata.org/entity/Q85892969</url>
+        <url>https://ieeexplore.ieee.org/author/37706374700</url>
+    </www>
+    <www mdate="2022-11-18" key="homepages/h/DieterHogrefe">
+        <author>Dieter Hogrefe</author>
+        <title>Home Page</title>
+        <url>http://www.ifi.informatik.uni-goettingen.de/staff/dieter_hogrefe.html</url>
+        <url>https://orcid.org/0000-0002-1033-9863</url>
+        <url>https://www.wikidata.org/entity/Q1222160</url>
+        <url>https://id.loc.gov/authorities/names/n91051463</url>
+        <url>https://d-nb.info/gnd/110576470</url>
+        <url>https://mathgenealogy.org/id.php?id=121539</url>
+        <note type="affiliation">University G&#246;ttingen</note>
+    </www>
+    <www mdate="2016-04-21" key="homepages/27/5933">
+        <author>Mrinal K. Naskar</author>
+        <author>Mrinal Kanti Naskar</author>
+        <title>Home Page</title>
+        <url>http://www.jaduniv.edu.in/profile.php?uid=348</url>
+        <url>https://scholar.google.com/citations?user=t5kOc_EAAAAJ</url>
+        <note type="affiliation">Jadavpur University, Kolkata, Department of Electronics and Telecommunication Engineering</note>
+    </www>
     <www mdate="2022-11-07" key="homepages/84/1790">
         <author>Zbigniew Kotulski</author>
         <title>Home Page</title>
@@ -224,4 +303,270 @@
         <ee>https://doi.org/10.1504/IJTMCC.2013.056431</ee>
         <url>db/journals/ijtmcc/ijtmcc1.html#KonorskiPKKCS13</url>
     </article>
+    <article mdate="2020-12-29" key="journals/ijtmcc/BabuRAHN14">
+        <author>Shaik Sahil Babu</author>
+        <author>Arnab Raha</author>
+        <author orcid="0000-0002-9581-401X">Omar Alfandi</author>
+        <author>Dieter Hogrefe</author>
+        <author>Mrinal Kanti Naskar</author>
+        <title>Trust integrated node potential aware routing for WSNs.</title>
+        <pages>103-124</pages>
+        <year>2014</year>
+        <volume>2</volume>
+        <journal>Int. J. Trust. Manag. Comput. Commun.</journal>
+        <number>2</number>
+        <ee>https://doi.org/10.1504/IJTMCC.2014.064142</ee>
+        <url>db/journals/ijtmcc/ijtmcc2.html#BabuRAHN14</url>
+    </article>
+    <www mdate="2021-11-11" key="homepages/141/0737">
+        <author>Anant V. Nimkar</author>
+        <title>Home Page</title>
+        <url>https://orcid.org/0000-0002-3904-2924</url>
+    </www>
+    <www mdate="2020-08-18" key="homepages/34/9049-1">
+        <author>Soumya K. Ghosh 0001</author>
+        <author>Soumya Kanti Ghosh 0001</author>
+        <title>Home Page</title>
+        <url>http://www.iitkgp.ac.in/fac-profiles/showprofile.php?empcode=aamUU</url>
+        <url>https://orcid.org/0000-0001-8359-581X</url>
+        <url>https://www.researcherid.com/rid/G-8229-2011</url>
+        <note type="affiliation">Indian Institute of Technology Kharagpur, School of Information Technology, India</note>
+    </www>
+    <article mdate="2022-04-09" key="journals/ijtmcc/NimkarG14">
+        <author orcid="0000-0002-3904-2924">Anant V. Nimkar</author>
+        <author>Soumya K. Ghosh 0001</author>
+        <title>An access control model for cloud-based EMR federation.</title>
+        <pages>330-352</pages>
+        <year>2014</year>
+        <volume>2</volume>
+        <journal>Int. J. Trust. Manag. Comput. Commun.</journal>
+        <number>4</number>
+        <ee>https://doi.org/10.1504/IJTMCC.2014.067369</ee>
+        <url>db/journals/ijtmcc/ijtmcc2.html#NimkarG14</url>
+    </article>
+    <www mdate="2014-11-05" key="homepages/153/4283">
+        <author>Jeril Kuriakose</author>
+        <title>Home Page</title>
+    </www>
+    <www mdate="2022-08-29" key="homepages/327/3765">
+        <author>Vedant Sandeep Joshi</author>
+        <title>Home Page</title>
+    </www>
+    <article mdate="2020-06-05" key="journals/ijtmcc/KuriakoseJ16">
+        <author>Jeril Kuriakose</author>
+        <author>Sandeep Joshi</author>
+        <title>Secured MPR node selection in the presence of cheating nodes.</title>
+        <pages>246-268</pages>
+        <year>2016</year>
+        <volume>3</volume>
+        <journal>Int. J. Trust. Manag. Comput. Commun.</journal>
+        <number>3</number>
+        <ee>https://doi.org/10.1504/IJTMCC.2016.10002828</ee>
+        <url>db/journals/ijtmcc/ijtmcc3.html#KuriakoseJ16</url>
+    </article>
+    <www mdate="2010-10-01" key="homepages/11/8576">
+        <author>Sabrina Nusrat</author>
+        <title>Home Page</title>
+    </www>
+    <www mdate="2021-07-24" key="homepages/28/6667">
+        <author>Julita Vassileva</author>
+        <title>Home Page</title>
+        <url>https://www.cs.usask.ca/faculty/julita/</url>
+        <url>https://scholar.google.com/citations?user=XunR3DYAAAAJ</url>
+        <url>https://dl.acm.org/profile/81100648053</url>
+        <url>https://orcid.org/0000-0001-5050-3106</url>
+        <url>https://www.wikidata.org/entity/Q57756719</url>
+        <note type="affiliation">University of Saskatchewan, Canada</note>
+    </www>
+    <article mdate="2020-06-05" key="journals/ijtmcc/NusratV13">
+        <author>Sabrina Nusrat</author>
+        <author>Julita Vassileva</author>
+        <title>Simulating a trust-based service recommender system for decentralised user modelling environment.</title>
+        <pages>121-139</pages>
+        <year>2013</year>
+        <volume>1</volume>
+        <journal>Int. J. Trust. Manag. Comput. Commun.</journal>
+        <number>2</number>
+        <ee>https://doi.org/10.1504/IJTMCC.2013.053262</ee>
+        <url>db/journals/ijtmcc/ijtmcc1.html#NusratV13</url>
+    </article>
+    <www mdate="2021-06-23" key="homepages/295/6176">
+        <author>Ashok Kumar Dasmahapatra</author>
+        <title>Home Page</title>
+    </www>
+    <www mdate="2009-06-09" key="homepages/55/3256">
+        <author>Santanu Chatterjee</author>
+        <title>Home Page</title>
+    </www>
+    <www mdate="2009-06-08" key="homepages/44/315">
+        <author>Jamuna Kanta Sing</author>
+        <title>Home Page</title>
+    </www>
+    <article mdate="2020-06-05" key="journals/ijtmcc/DasCS14">
+        <author>Ashok Kumar Das</author>
+        <author>Santanu Chatterjee</author>
+        <author>Jamuna Kanta Sing</author>
+        <title>Formal security analysis and verification of a password-based user authentication scheme for hierarchical wireless sensor networks.</title>
+        <pages>78-102</pages>
+        <year>2014</year>
+        <volume>2</volume>
+        <journal>Int. J. Trust. Manag. Comput. Commun.</journal>
+        <number>1</number>
+        <ee>https://doi.org/10.1504/IJTMCC.2014.063273</ee>
+        <url>db/journals/ijtmcc/ijtmcc2.html#DasCS14</url>
+    </article>
+    <www mdate="2016-03-11" key="homepages/164/9139">
+        <author>Mulagala Sandhya</author>
+        <title>Home Page</title>
+        <url>https://scholar.google.com/citations?user=UvXBKyQAAAAJ</url>
+    </www>
+    <www mdate="2009-06-08" key="homepages/44/57">
+        <author>Munaga V. N. K. Prasad</author>
+        <title>Home Page</title>
+    </www>
+    <www mdate="2011-09-12" key="homepages/47/10092">
+        <author>Leila Kheroua</author>
+        <title>Home Page</title>
+    </www>
+    <www mdate="2009-06-10" key="homepages/15/5640">
+        <author>Samira Moussaoui</author>
+        <title>Home Page</title>
+    </www>
+    <www mdate="2015-06-24" key="homepages/30/10094">
+        <author>Louiza Mansour</author>
+        <title>Home Page</title>
+    </www>
+    <www mdate="2009-06-08" key="homepages/44/57">
+        <author>Munaga V. N. K. Prasad</author>
+        <title>Home Page</title>
+    </www>
+    <www mdate="2022-12-03" key="homepages/a/AAbraham">
+        <author>Ajith Abraham</author>
+        <title>Home Page</title>
+        <url>http://ajith.softcomputing.net/</url>
+        <url>https://scholar.google.com/citations?user=i95DGLQAAAAJ</url>
+        <url>https://zbmath.org/authors/?q=ai:abraham.ajith</url>
+        <url>https://mathgenealogy.org/id.php?id=116600</url>
+        <url>https://orcid.org/0000-0002-0169-6738</url>
+        <url>https://www.wikidata.org/entity/Q102316243</url>
+        <url>https://www.researcherid.com/rid/A-1416-2008</url>
+        <url>https://id.loc.gov/authorities/names/n2002158811</url>
+        <url>https://d-nb.info/gnd/123881315</url>
+        <url>https://ieeexplore.ieee.org/author/37297713700</url>
+        <url>https://mathscinet.ams.org/mathscinet/MRAuthorID/719173</url>
+        <note type="affiliation">Machine Intelligence Research Labs, MIR, Auburn, USA</note>
+    </www>
+    <article mdate="2020-06-05" key="journals/ijtmcc/SandhyaP16">
+        <author>Mulagala Sandhya</author>
+        <author>Munaga V. N. K. Prasad</author>
+        <title>A hybrid technique to secure fingerprint templates using Delaunay neighbour structures.</title>
+        <pages>319-335</pages>
+        <year>2016</year>
+        <volume>3</volume>
+        <journal>Int. J. Trust. Manag. Comput. Commun.</journal>
+        <number>4</number>
+        <ee>https://doi.org/10.1504/IJTMCC.2016.10005484</ee>
+        <url>db/journals/ijtmcc/ijtmcc3.html#SandhyaP16</url>
+    </article>
+
+    <article mdate="2020-06-05" key="journals/ijtmcc/KherouaMM13">
+        <author>Leila Kheroua</author>
+        <author>Samira Moussaoui</author>
+        <author>Louiza Mansour</author>
+        <title>EDARD: efficient data access based on rumour dissemination in wireless sensor networks.</title>
+        <pages>73-84</pages>
+        <year>2013</year>
+        <volume>1</volume>
+        <journal>Int. J. Trust. Manag. Comput. Commun.</journal>
+        <number>1</number>
+        <ee>https://doi.org/10.1504/IJTMCC.2013.052526</ee>
+        <url>db/journals/ijtmcc/ijtmcc1.html#KherouaMM13</url>
+    </article>
+    <www mdate="2020-05-19" key="homepages/o/FrankOlken">
+        <author>Frank Olken</author>
+        <title>Home Page</title>
+        <url>https://crd.lbl.gov/news-and-publications/news/2019/longtime-lab-pioneering-data-scientist-frank-olken-has-died/</url>
+        <url>https://crd.lbl.gov/departments/data-science-and-technology/idf/affiliates/frank-olken/</url>
+        <url>https://scholar.google.com/citations?user=9xAs5lIAAAAJ</url>
+        <url>https://twitter.com/frankolken</url>
+        <note type="affiliation">Lawrence Berkeley National Laboratory, CA, USA</note>
+        <note type="affiliation">National Science Foundation, Arlington, VA, USA</note>
+    </www>
+    <phdthesis mdate="2002-01-03" key="phd/Olken93">
+        <author>Frank Olken</author>
+        <title>Random Sampling from Databases</title>
+        <year>1993</year>
+        <school>University of California at Berkeley</school>
+        <publisher>LBL Technical Report</publisher>
+        <number>LBL-32883</number>
+    </phdthesis>
+    <article mdate="2020-06-05" key="journals/ijtmcc/PandaA14">
+        <author>Mrutyunjaya Panda</author>
+        <author>Ajith Abraham</author>
+        <title>Development of a reliable trust management model in social internet of things.</title>
+        <pages>229-258</pages>
+        <year>2014</year>
+        <volume>2</volume>
+        <journal>Int. J. Trust. Manag. Comput. Commun.</journal>
+        <number>3</number>
+        <ee>https://doi.org/10.1504/IJTMCC.2014.067305</ee>
+        <url>db/journals/ijtmcc/ijtmcc2.html#PandaA14</url>
+    </article>
+    <book mdate="2021-07-17" key="phd/dnb/Curth89">
+        <author>Michael A. Curth</author>
+        <title>Planspieltechnik und Computer-based-Training zur Schulung von Eink&#228;ufern im Handel.</title>
+        <year>1989</year>
+        <pages>1-370</pages>
+        <publisher>Eul, Germany</publisher>
+        <isbn>978-3-89012-177-2</isbn>
+        <ee>https://d-nb.info/891654135</ee>
+    </book>
+    <book mdate="2019-08-06" key="reference/docip/2014">
+        <editor>David S. Doermann</editor>
+        <editor>Karl Tombre</editor>
+        <title>Handbook of Document Image Processing and Recognition</title>
+        <year>2014</year>
+        <crossref>reference/docip/2014</crossref>
+        <publisher>Springer</publisher>
+        <ee>https://doi.org/10.1007/978-0-85729-859-1</ee>
+        <isbn>978-0-85729-858-4</isbn>
+        <booktitle>Handbook of Document Image Processing and Recognition</booktitle>
+        <url>db/reference/docip/docip2014.html</url>
+    </book>
+    <proceedings mdate="2019-05-14" key="conf/coopis/2000">
+        <editor>Opher Etzion</editor>
+        <editor>Peter Scheuermann</editor>
+        <title>Cooperative Information Systems, 7th International Conference, CoopIS 2000, Eilat, Israel, September 6-8, 2000, Proceedings</title>
+        <booktitle>CoopIS</booktitle>
+        <series href="db/series/lncs/index.html">Lecture Notes in Computer Science</series>
+        <volume>1901</volume>
+        <publisher>Springer</publisher>
+        <year>2000</year>
+        <isbn>3-540-41021-X</isbn>
+        <ee>https://doi.org/10.1007/10722620</ee>
+        <url>db/conf/coopis/coopis2000.html</url>
+    </proceedings>
+    <inproceedings mdate="2017-05-24" key="conf/coopis/ChenD00">
+        <author>Qiming Chen</author>
+        <author>Umeshwar Dayal</author>
+        <title>Multi-Agent Cooperative Transactions for E-Commerce.</title>
+        <pages>311-322</pages>
+        <year>2000</year>
+        <crossref>conf/coopis/2000</crossref>
+        <booktitle>CoopIS</booktitle>
+        <url>db/conf/coopis/coopis2000.html#ChenD00</url>
+        <ee>https://doi.org/10.1007/10722620_29</ee>
+        <cite>journals/vldb/BreitbartGS92</cite>
+        <cite>...</cite>
+        <cite>conf/coopis/ChenCDH98</cite>
+        <cite>conf/icde/ChenD97</cite>
+        <cite>conf/edbt/ChenD96</cite>
+        <cite>conf/ride/ChenD96</cite>
+        <cite>books/mk/elmagarmid92/ChrysanthisR92</cite>
+        <cite>conf/cikm/FininFMM94</cite>
+        <cite>...</cite>
+        <cite>books/mk/GrayR93</cite>
+        <cite>...</cite>
+        <cite>conf/dexa/Pitoura98</cite>
+    </inproceedings>
 </list>
