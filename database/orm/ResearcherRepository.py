@@ -11,14 +11,18 @@ class ResearcherRepository(RepositoryBase):
         researcher = Researcher(id=uuid, current_alias=currentAlias, xml_key=xmlKey, xml_mdate=xmlMdate, xml_item=xmlItem)
 
         for name in names:
+            if name is None:
+                name = xmlKey
             researcherName = ResearcherName(researcher_id=researcher.id, name=name)
-            researcher.names.append(researcherName)
-            self.session.add(researcherName)
+            if researcherName not in researcher.names:
+                researcher.names.append(researcherName)
+                self.session.add(researcherName)
 
         researcher.xml_cross_reference.append(XmlKey(researcher_id=researcher.id, xml_key=xmlKey))
 
         for affiliation in affiliations:
-            researcher.affiliations.append(affiliation)
+            if affiliation not in researcher.affiliations:
+                researcher.affiliations.append(affiliation)
 
 
         self.session.add(researcher)

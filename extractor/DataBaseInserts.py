@@ -48,7 +48,10 @@ class DataBaseInserts():
         except:
             print("Error insert research -> id: ", id, " | name: ", name, " | key: ", key)
 
-    def insertKeyFromCrossRef(self, key, crosRef, repoResercher):
+    def insertKeyFromCrossRef(self, key, crosRef, item, repoResercher, errorLog):
         r = repoResercher.getOneByXmlKey(key)
-        r.xml_cross_reference.append(XmlKey(researcher_id=r.id, xml_key=crosRef))
-        repoResercher.updateResearcher(r)
+        if r is not None:
+            r.xml_cross_reference.append(XmlKey(researcher_id=r.id, xml_key=crosRef))
+            repoResercher.updateResearcher(r)
+        else:
+            errorLog.addItemErrorLogger(item)

@@ -9,12 +9,31 @@ from database.DataBaseConnection import DataBaseConnection
 from database.orm.InstitutionRepository import InstitutionRepository
 from database.orm.ResearcherRepository import ResearcherRepository
 from extractor.DataBaseInserts import DataBaseInserts
+from extractor.ErrorLogger import ErrorLogger
+
 
 def rawData(file):
     xml = open(file)
     tree = ET.parse(xml, Parser.parser())
     xml.close()
     return tree
+
+def iterParseData(file, repoR, repoI, errorLog):
+    rCrossRef = {}
+    xml = open(file)
+    for event, item in ET.iterparse(xml, ["start", "end"], parser=Parser.parser()):
+        if event == 'start':
+            if item.tag == "www":
+                result = dbInserts.insertResearcher(item, repoR, repoI)
+                if "r_cross_ref" in result:
+                    rCrossRef[result["r_cross_ref"]] = {'crossref': result["r_key"], 'item': ET.tostring(item)}
+            item.clear()
+
+    print("Totals:")
+    errorLog.startObjectList('crossref')
+    for key in rCrossRef:
+        dbInserts.insertKeyFromCrossRef(key, rCrossRef[key]['crossref'], rCrossRef[key]['item'], repoR, errorLog)
+    errorLog.endObjectList('crossref')
 
 def splitXml(tree):
     baseFilesPath = './data/split_%s.xml'
@@ -71,12 +90,19 @@ repoI = InstitutionRepository(session)
 
 dbInserts = DataBaseInserts(session)
 
-if args.xml is not None:
-    tree = rawData(args.xml)
-    if args.splitXml is True:
-        splitXml(tree)
-    if args.insert is True:
-        inserts(tree, dbInserts, repoR, repoI)
+errorLog = ErrorLogger()
+errorLog.startObjectList('errorlist')
+
+iterParseData(args.xml, repoR, repoI, errorLog)
+
+errorLog.endObjectList('errorlist')
+
+#if args.xml is not None:
+#    tree = rawData(args.xml)
+#    if args.splitXml is True:
+#        splitXml(tree)
+#    if args.insert is True:
+#        inserts(tree, dbInserts, repoR, repoI)
 
 
 print('TIME: ', time.time() - strTime)
