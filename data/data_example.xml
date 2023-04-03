@@ -348,25 +348,23 @@
         <author>Jeril Kuriakose</author>
         <title>Home Page</title>
     </www>
-    <www mdate="2022-08-29" key="homepages/327/3765">
-        <author>Vedant Sandeep Joshi</author>
+    <www mdate="2014-11-05" key="homepages/153/4374">
+        <author>Sandeep Joshi</author>
         <title>Home Page</title>
     </www>
-    <article mdate="2020-06-05" key="journals/ijtmcc/KuriakoseJ16">
-        <author>Jeril Kuriakose</author>
-        <author>Sandeep Joshi</author>
-        <title>Secured MPR node selection in the presence of cheating nodes.</title>
-        <pages>246-268</pages>
-        <year>2016</year>
-        <volume>3</volume>
-        <journal>Int. J. Trust. Manag. Comput. Commun.</journal>
-        <number>3</number>
-        <ee>https://doi.org/10.1504/IJTMCC.2016.10002828</ee>
-        <url>db/journals/ijtmcc/ijtmcc3.html#KuriakoseJ16</url>
-    </article>
     <www mdate="2010-10-01" key="homepages/11/8576">
         <author>Sabrina Nusrat</author>
         <title>Home Page</title>
+    </www>
+    <www mdate="2021-07-24" key="homepages/28/6667">
+        <author>Julita Vassileva</author>
+        <title>Home Page</title>
+        <url>https://www.cs.usask.ca/faculty/julita/</url>
+        <url>https://scholar.google.com/citations?user=XunR3DYAAAAJ</url>
+        <url>https://dl.acm.org/profile/81100648053</url>
+        <url>https://orcid.org/0000-0001-5050-3106</url>
+        <url>https://www.wikidata.org/entity/Q57756719</url>
+        <note type="affiliation">University of Saskatchewan, Canada</note>
     </www>
     <www mdate="2021-07-24" key="homepages/28/6667">
         <author>Julita Vassileva</author>
@@ -390,9 +388,23 @@
         <ee>https://doi.org/10.1504/IJTMCC.2013.053262</ee>
         <url>db/journals/ijtmcc/ijtmcc1.html#NusratV13</url>
     </article>
-    <www mdate="2021-06-23" key="homepages/295/6176">
-        <author>Ashok Kumar Dasmahapatra</author>
+    <www mdate="2022-09-05" key="homepages/39/871">
+        <author>Ashok Kumar Das</author>
         <title>Home Page</title>
+        <note type="affiliation">International Institute of Information Technology (IIIT), Center for Security, Theory and Algorithmic Research, Hyderabad, India</note>
+        <note label="2022" type="affiliation">Old Dominion University, Suffolk, VA 23435, USA</note>
+        <note label="2008-2010" type="affiliation">International Institute of Information Technology, Bhubaneswar, India, Department of Computer Science and Engineering</note>
+        <note label="PhD, 2008" type="affiliation">Indian Institute of Technology Kharagpur, India, Department of Computer Science and Engineering</note>
+        <note label="2000-2004" type="affiliation">Centre for Development of Telematics (C-DOT), New Delhi, India</note>
+        <url>https://sites.google.com/view/iitkgpakdas/</url>
+        <url>https://sites.google.com/site/iitkgpakdas/</url>
+        <url>https://www.iiit.ac.in/people/faculty/ashokkdas/</url>
+        <url>https://scholar.google.com/citations?user=bToAUHMAAAAJ</url>
+        <url>https://orcid.org/0000-0002-5196-9589</url>
+        <url>https://www.wikidata.org/entity/Q58624253</url>
+        <url>https://www.scopus.com/authid/detail.uri?authorId=55450732800</url>
+        <url>https://www.researchgate.net/profile/Ashok-Kumar-Das-3</url>
+        <url>https://orkg.org/resource/R203608</url>
     </www>
     <www mdate="2009-06-09" key="homepages/55/3256">
         <author>Santanu Chatterjee</author>
@@ -500,6 +512,135 @@
         <publisher>LBL Technical Report</publisher>
         <number>LBL-32883</number>
     </phdthesis>
+    <www mdate="2022-08-16" key="homepages/124/6700">
+        <author>Wangda Zhang</author>
+        <title>Home Page</title>
+        <note type="affiliation">Microsoft Research, New York City, NY, USA</note>
+        <note label="former, PhD 2020" type="affiliation">Columbia University, Computer Science Department, New York City, NY, USA</note>
+        <note label="former" type="affiliation">University of Hong Kong, Department of Computer Science, Pokfulam, Hong Kong</note>
+        <note label="former" type="affiliation">Tianjin University, School of Computer Science and Technology, China</note>
+        <url>https://zwd.nyc/</url>
+        <url>https://www.microsoft.com/en-us/research/people/wangdazhang/</url>
+        <url>https://www.cs.columbia.edu/~zwd/</url>
+        <url>https://dl.acm.org/profile/99659323338</url>
+        <url>https://orcid.org/0000-0002-4965-8132</url>
+        <url>https://ieeexplore.ieee.org/author/37088410447</url>
+    </www>
+    <www mdate="2019-12-23" key="homepages/l/RitaLey">
+        <author>Rita Ley</author>
+        <title>Home Page</title>
+        <note type="affiliation">HPI (IKSMS/CIPMS), Konz, Germany</note>
+        <note type="affiliation" label="former">Bundesanstalt f&#252;r Gew&#228;sserkunde, Koblenz, Germany</note>
+        <note type="affiliation" label="former">Universit&#228;t Trier, Physische Geographie</note>
+    </www>
+    <mastersthesis mdate="2020-03-12" key="ms/Ley2006">
+        <author>Rita Ley</author>
+        <title>Der Einfluss kleiner naturnaher Retentionsma&#223;nahmen in der Fl&#228;che auf den Hochwasserabfluss - Kleinr&#252;ckhaltebecken -.</title>
+        <year>2006</year>
+        <school>Diplomarbeit, Universit&#228;t Trier, FB VI, Physische Geographie</school>
+        <ee type="oa">http://dblp.uni-trier.de/papers/DiplomarbeitRitaLey.pdf</ee>
+    </mastersthesis>
+    <mastersthesis mdate="2022-06-10" key="phd/basesearch/Zhang13n">
+        <author>Wangda Zhang</author>
+        <title>Evaluating multi-way joins over discounted hitting time.</title>
+        <year>2013</year>
+        <school>University of Hong Kong, Pokfulam, Hong Kong</school>
+        <ee>https://doi.org/10.5353/th_b5177353</ee>
+        <ee>https://hdl.handle.net/10722/196484</ee>
+        <ee>https://www.base-search.net/Record/6f7d82db1c72d26a81870263db3fce3259401336fa36360b01bb5c6cf3beaa47</ee>
+        <note type="source">base-search.net (ftunivhongkonghu:oai:hub.hku.hk:10722/196484)</note>
+    </mastersthesis>
+    <www mdate="2009-12-28" key="homepages/24/7644">
+        <author>Mrutyunjaya Panda</author>
+        <title>Home Page</title>
+    </www>
+    <www mdate="2022-11-19" key="homepages/b/HLBodlaender">
+        <author>Hans L. Bodlaender</author>
+        <title>Home Page</title>
+        <note type="affiliation">Utrecht University, Netherlands</note>
+        <url>http://www.cs.uu.nl/people/hansb/</url>
+        <url>https://scholar.google.com/citations?user=CcqZZqMAAAAJ</url>
+        <url>https://dl.acm.org/profile/81100441598</url>
+        <url>https://zbmath.org/authors/?q=ai:bodlaender.hans-l</url>
+        <url>https://mathgenealogy.org/id.php?id=83356</url>
+        <url>https://en.wikipedia.org/wiki/Hans_L._Bodlaender</url>
+        <url>https://orcid.org/0000-0002-9297-3330</url>
+        <url>https://www.wikidata.org/entity/Q5650368</url>
+        <url>http://isni.org/isni/0000000081342475</url>
+        <url>https://id.loc.gov/authorities/names/n88644272</url>
+        <url>https://d-nb.info/gnd/1041275552</url>
+        <url>https://mathscinet.ams.org/mathscinet/MRAuthorID/38475</url>
+    </www>
+    <www mdate="2022-11-01" key="homepages/f/FedorVFomin">
+        <author>Fedor V. Fomin</author>
+        <title>Home Page</title>
+        <url>http://www.ii.uib.no/~fomin/</url>
+        <url>https://scholar.google.com/citations?user=96ZXvOsAAAAJ</url>
+        <url>https://dl.acm.org/profile/81100282175</url>
+        <url>https://zbmath.org/authors/?q=ai:fomin.fedor-v</url>
+        <url>https://mathgenealogy.org/id.php?id=110046</url>
+        <url>https://en.wikipedia.org/wiki/Fedor_Fomin</url>
+        <url>https://orcid.org/0000-0003-1955-4612</url>
+        <url>https://www.wikidata.org/entity/Q30103845</url>
+        <url>https://id.loc.gov/authorities/names/no2006122893</url>
+        <url>https://mathscinet.ams.org/mathscinet/MRAuthorID/601986</url>
+        <note type="affiliation">University of Bergen</note>
+    </www>
+    <www mdate="2022-02-15" key="homepages/78/67">
+        <author>Daniel Lokshtanov</author>
+        <author>Daniel Lokshantov</author>
+        <title>Home Page</title>
+        <url>https://sites.cs.ucsb.edu/~daniello/</url>
+        <url>https://www.ii.uib.no/~daniello/</url>
+        <url>https://scholar.google.com/citations?user=vaQGFLsAAAAJ</url>
+        <url>https://dl.acm.org/profile/81384595784</url>
+        <url>https://twitter.com/lokshtanov</url>
+        <note label="PhD 2009" type="affiliation">University of California Santa Barbara, Department of Computer Science, CA, USA</note>
+        <note type="affiliation">University of Bergen, Department of Informatics, Norway</note>
+    </www>
+    <www mdate="2009-06-09" key="homepages/89/939">
+        <author>Eelko Penninkx</author>
+        <title>Home Page</title>
+    </www>
+    <www mdate="2022-12-04" key="homepages/t/DimitriosMThilikos">
+        <author>Dimitrios M. Thilikos</author>
+        <title>Home Page</title>
+        <note type="affiliation">Polytechnic University of Catalonia, Barcelona, Spain</note>
+        <url>http://www.lsi.upc.es/~sedthilk/</url>
+        <url>https://scholar.google.com/citations?user=L-q3PPkAAAAJ</url>
+        <url>https://zbmath.org/authors/?q=ai:thilikos.dimitrios-m</url>
+        <url>https://orcid.org/0000-0003-0470-1800</url>
+        <url>https://www.wikidata.org/entity/Q102278317</url>
+        <url>https://mathgenealogy.org/id.php?id=91347</url>
+        <url>https://mathscinet.ams.org/mathscinet/MRAuthorID/367560</url>
+    </www>
+    <www mdate="2022-02-15" key="homepages/11/5491">
+        <author>Saket Saurabh 0001</author>
+        <title>Home Page</title>
+        <note type="affiliation">Institute of Mathematical Sciences, Chennai, India</note>
+        <url>https://sites.google.com/view/sakethome</url>
+        <url>https://scholar.google.com/citations?user=76_9TI0AAAAJ</url>
+        <url>https://dl.acm.org/profile/81100005989</url>
+        <url>https://zbmath.org/authors/?q=ai:saurabh.saket</url>
+        <url>https://orcid.org/0000-0001-7847-6402</url>
+    </www>
+    <article mdate="2019-06-02" key="journals/jacm/BodlaenderFLPST16">
+        <author orcid="0000-0002-9297-3330">Hans L. Bodlaender</author>
+        <author orcid="0000-0003-1955-4612">Fedor V. Fomin</author>
+        <author>Daniel Lokshtanov</author>
+        <author>Eelko Penninkx</author>
+        <author>Saket Saurabh 0001</author>
+        <author>Dimitrios M. Thilikos</author>
+        <title>(Meta) Kernelization.</title>
+        <pages>44:1-44:69</pages>
+        <year>2016</year>
+        <volume>63</volume>
+        <journal>J. ACM</journal>
+        <number>5</number>
+        <ee>https://doi.org/10.1145/2973749</ee>
+        <ee>https://www.wikidata.org/entity/Q59567396</ee>
+        <url>db/journals/jacm/jacm63.html#BodlaenderFLPST16</url>
+    </article>
     <article mdate="2020-06-05" key="journals/ijtmcc/PandaA14">
         <author>Mrutyunjaya Panda</author>
         <author>Ajith Abraham</author>
@@ -546,6 +687,20 @@
         <ee>https://doi.org/10.1007/10722620</ee>
         <url>db/conf/coopis/coopis2000.html</url>
     </proceedings>
+    <proceedings mdate="2021-04-30" key="conf/coopis/2003">
+        <editor>Robert Meersman</editor>
+        <editor>Zahir Tari</editor>
+        <editor>Douglas C. Schmidt</editor>
+        <title>On The Move to Meaningful Internet Systems 2003: CoopIS, DOA, and ODBASE - OTM Confederated International Conferences, CoopIS, DOA, and ODBASE 2003, Catania, Sicily, Italy, November 3-7, 2003</title>
+        <booktitle>OTM</booktitle>
+        <series href="db/series/lncs/index.html">Lecture Notes in Computer Science</series>
+        <volume>2888</volume>
+        <publisher>Springer</publisher>
+        <year>2003</year>
+        <isbn>3-540-20498-9</isbn>
+        <ee>https://doi.org/10.1007/b94348</ee>
+        <url>db/conf/coopis/coopis2003.html</url>
+    </proceedings>
     <inproceedings mdate="2017-05-24" key="conf/coopis/ChenD00">
         <author>Qiming Chen</author>
         <author>Umeshwar Dayal</author>
@@ -569,4 +724,16 @@
         <cite>...</cite>
         <cite>conf/dexa/Pitoura98</cite>
     </inproceedings>
+    <article mdate="2020-06-05" key="journals/ijtmcc/KuriakoseJ16">
+        <author>Jeril Kuriakose</author>
+        <author>Sandeep Joshi</author>
+        <title>Secured MPR node selection in the presence of cheating nodes.</title>
+        <pages>246-268</pages>
+        <year>2016</year>
+        <volume>3</volume>
+        <journal>Int. J. Trust. Manag. Comput. Commun.</journal>
+        <number>3</number>
+        <ee>https://doi.org/10.1504/IJTMCC.2016.10002828</ee>
+        <url>db/journals/ijtmcc/ijtmcc3.html#KuriakoseJ16</url>
+    </article>
 </list>

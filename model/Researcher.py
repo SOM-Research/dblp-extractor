@@ -24,6 +24,7 @@ class Researcher(ModelBase):
     names: Mapped[List["ResearcherName"]] = relationship(back_populates="researcher")
     affiliations: Mapped[List["Institution"]] = relationship(secondary=affiliation)
     publications: Mapped[List["Authorship"]] = relationship(back_populates="researcher")
+    publication_groups: Mapped[List["Editor"]] = relationship(back_populates="researcher")
 
     def addOrcid(self, orcid):
         orcidRegEx = re.compile('([0-9][0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]-[0-9][0-9][0-9]([0-9]|X))')
