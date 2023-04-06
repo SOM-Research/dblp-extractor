@@ -5,11 +5,11 @@ from model.XmlKey import XmlKey
 
 class DataBaseInserts():
 
-    def __init__(self, alchemySession):
+    def __init__(self, alchemySession, errorLogger):
         self.session = alchemySession
+        self.errorLogger = errorLogger
 
     def insertResearcher(self, item, repoResearcher, repoInst):
-        institutionNotSaved = 0
         key = item.attrib.get('key')
         mdate = item.attrib.get('mdate')
         xmlItem = ET.tostring(item)
@@ -17,8 +17,9 @@ class DataBaseInserts():
         names = []
         aff = []
         institutions = []
-        orcid = None
+        urls = []
         crossRef = None
+        errorInstitutions =[]
 
         for child in item.iter():
             if child.tag == "crossref":
@@ -27,7 +28,7 @@ class DataBaseInserts():
                 if child.text not in names:
                     names.append(child.text)
             if child.tag == "url":
-                orcid = child.text
+                urls.append(child.text)
             if child.tag == "note":
                 if child.attrib.get('type') == "affiliation":
                     institutions.append(child.text)
@@ -37,16 +38,21 @@ class DataBaseInserts():
                     if inst is not None:
                         aff.append(inst)
                     else:
-                        institutionNotSaved += 1
-                        print("Intsitution not saved: ", child.text)
-                        print("Total institutions not saved: ", institutionNotSaved)
+                        errorInstitutions.append(child.text)
+
+        if len(errorInstitutions) > 0:
+            self.errorLogger.startObjectList('institution-not-found')
+            for institution in errorInstitutions:
+                self.errorLogger.addItemErrorLogger('<institution-error>%s</institution-error>' % institution)
+            self.errorLogger.addItemErrorLogger(xmlItem)
+            self.errorLogger.endObjectList('institution-not-found')
 
         if crossRef is not None:
             return {"r_key": key, "r_cross_ref": crossRef}
         name = key
         if len(names) > 0:
             name = names[0]
-        researcher = repoResearcher.insertResearcher(id, name, orcid, key, mdate, xmlItem, names, aff)
+        researcher = repoResearcher.insertResearcher(id, name, 0, urls, key, mdate, xmlItem, names, aff)
         return {"researcher": researcher}
 
 
@@ -80,10 +86,7 @@ class DataBaseInserts():
             if child.tag == 'title':
                 title = child.text
             if child.tag == 'year':
-                try:
-                    year = int(child.text)
-                except:
-                    print('Error year: ', child.text)
+                year = int(child.text)
             if child.tag == 'pages':
                 pages = child.text
             if child.tag == 'ee':
@@ -96,15 +99,25 @@ class DataBaseInserts():
                 series = child.text
 
         publication = repoP.insertPublication(id, title, year, pages, type, key, mdate, xmlItem, ee)
+        errorAuthors = []
 
         for author in authors:
             researcher = repoR.getOneByName(author)
             if researcher is not None:
+                if researcher.last_year_current_alias < publication.year:
+                    researcher.updateCurrentAlias(author, publication.year)
                 if authors[author]['orcid'] is not None and researcher.orcid is None:
                     researcher.addOrcid(authors[author]['orcid'])
                 repoP.addAuthorship(publication, researcher, authors[author]['position'])
             else:
-                print('researcher None: ', author)
+                errorAuthors.append(author)
+
+        if len(errorAuthors) > 0:
+            self.errorLogger.startObjectList('authors-not-found')
+            for author in errorAuthors:
+                self.errorLogger.addItemErrorLogger('<author-error>%s</author-error>' % author)
+            self.errorLogger.addItemErrorLogger(xmlItem)
+            self.errorLogger.endObjectList('authors-not-found')
 
         if crossref is not None and crossref != key:
             pGroup = repoPG.findByXmlKey(crossref)
@@ -188,11 +201,26 @@ class DataBaseInserts():
 
         keySplited = xmlKey.split('/')
         researchers = []
+        errorEditors = []
         for editor in editors:
             researcher = repoR.getOneByName(editor)
-            if editor is not None and researcher not in researchers:
-                researchers.append(researcher)
+            if researcher is None:
+                errorEditors.append(editor)
+            else:
+                if researcher.last_year_current_alias < year:
+                    researcher.updateCurrentAlias(editor, year)
+                if researcher not in researchers:
+                    researchers.append(researcher)
+
+        if len(errorEditors) > 0:
+            self.errorLogger.startObjectList('authors-not-found')
+            for author in errorEditors:
+                self.errorLogger.addItemErrorLogger('<author-error>%s</author-error>' % author)
+            self.errorLogger.addItemErrorLogger(xmlItem)
+            self.errorLogger.endObjectList('authors-not-found')
+
         pGroup = repoPG.insertPublicationGroup(uuid, title, publisher, year, isbn,  booktitle, serie, volume, number, ee, xmlKey, xmlMdate, xmlItem, researchers)
+
         if keySplited[0] == 'conf' or keySplited[0] == 'journals' or serie is not None:
             venueName = serie if serie is not None else keySplited[1]
             pVenue = repoPV.findByName(venueName)
@@ -206,14 +234,3 @@ class DataBaseInserts():
                 repoPV.addPublicationGroupInVenue(pVenue, pGroup)
 
         return {'publication_group': pGroup, 'publication_venue': pVenue}
-
-    def insertPublicationsGroupFromArticleResoult(self, data, repoPG):
-        uuid = uuid4()
-        title = data[data['type']]
-        year = None
-        volume = None
-        if 'year' in data:
-            year = data['year']
-        if 'volume' in data:
-            volume = data['volume']
-        repoPG.insertPublicationGroup(uuid, title, None, year, None, None, None, volume, None, None, None, None)

@@ -614,6 +614,12 @@
         <url>https://mathgenealogy.org/id.php?id=91347</url>
         <url>https://mathscinet.ams.org/mathscinet/MRAuthorID/367560</url>
     </www>
+    <www mdate="2019-10-19" key="homepages/78/6032">
+        <author>Ernest Valveny</author>
+        <title>Home Page</title>
+        <note type="affiliation">Autonomous University of Barcelona, Spain</note>
+        <url>https://orcid.org/0000-0002-0368-9697</url>
+    </www>
     <www mdate="2022-02-15" key="homepages/11/5491">
         <author>Saket Saurabh 0001</author>
         <title>Home Page</title>
@@ -736,4 +742,14 @@
         <ee>https://doi.org/10.1504/IJTMCC.2016.10002828</ee>
         <url>db/journals/ijtmcc/ijtmcc3.html#KuriakoseJ16</url>
     </article>
+    <incollection mdate="2019-08-06" key="reference/docip/Valveny14">
+        <author>Ernest Valveny</author>
+        <title>Datasets and Annotations for Document Analysis and Recognition.</title>
+        <pages>983-1009</pages>
+        <year>2014</year>
+        <crossref>reference/docip/2014</crossref>
+        <booktitle>Handbook of Document Image Processing and Recognition</booktitle>
+        <ee>https://doi.org/10.1007/978-0-85729-859-1_32</ee>
+        <url>db/reference/docip/docip2014.html#Valveny14</url>
+    </incollection>
 </list>

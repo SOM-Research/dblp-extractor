@@ -5,6 +5,7 @@ use metascience;
 CREATE TABLE researchers (
     id UUID PRIMARY KEY,
     current_alias varchar(255),
+    last_year_current_alias int default 0,
     orcid varchar(255),
     xml_key VARCHAR(255),
     xml_mdate DATE,

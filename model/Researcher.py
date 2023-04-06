@@ -1,6 +1,6 @@
 from typing import List
 import re
-from sqlalchemy import Column, String, ForeignKey, UUID, DATE, Text, Table
+from sqlalchemy import Column, String, ForeignKey, UUID, DATE, Text, Table, Integer
 from sqlalchemy.orm import relationship, Mapped
 from model import ModelBase
 
@@ -16,6 +16,7 @@ class Researcher(ModelBase):
 
     id = Column(UUID, primary_key=True)
     current_alias = Column(String)
+    last_year_current_alias = Column(Integer)
     orcid = Column(String)
     xml_key = Column(String)
     xml_mdate = Column(DATE)
@@ -26,12 +27,19 @@ class Researcher(ModelBase):
     publications: Mapped[List["Authorship"]] = relationship(back_populates="researcher")
     publication_groups: Mapped[List["Editor"]] = relationship(back_populates="researcher")
 
+    def orcidRegEx(self):
+        return re.compile('([0-9][0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]-[0-9][0-9][0-9]([0-9]|X))')
+
+    def orcidUrlRegEx(self):
+        return re.compile('https://orcid\.org/.*')
+
     def addOrcid(self, orcid):
-        orcidRegEx = re.compile('([0-9][0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]-[0-9][0-9][0-9]([0-9]|X))')
-        orcidPath = re.compile('https://orcid\.org/.*')
-        if orcidRegEx.match(orcid):
+        if self.orcidRegEx().match(orcid):
             self.orcid = orcid
             return orcid
-        if orcidPath.match(orcid):
-            self.orcid = re.search(orcidRegEx, orcid).group(1)
-            return self.orcid
+        if self.orcidUrlRegEx().match(orcid):
+            self.orcid = re.search(self.orcidRegEx(), orcid).group(1)
+
+    def updateCurrentAlias(self, currentAlias, year):
+        self.current_alias = currentAlias
+        self.last_year_current_alias = year
