@@ -43,7 +43,7 @@ class DataBaseInserts():
         if len(errorInstitutions) > 0:
             self.errorLogger.startObjectList('institution-not-found')
             for institution in errorInstitutions:
-                self.errorLogger.addItemErrorLogger('<institution-error>%s</institution-error>' % institution)
+                self.errorLogger.addItemErrorLogger(bytes('<institution-error>%s</institution-error>' % institution, 'utf-8'))
             self.errorLogger.addItemErrorLogger(xmlItem)
             self.errorLogger.endObjectList('institution-not-found')
 
@@ -115,7 +115,7 @@ class DataBaseInserts():
         if len(errorAuthors) > 0:
             self.errorLogger.startObjectList('authors-not-found')
             for author in errorAuthors:
-                self.errorLogger.addItemErrorLogger('<author-error>%s</author-error>' % author)
+                self.errorLogger.addItemErrorLogger(bytes('<author-error>%s</author-error>' % author, 'utf-8'))
             self.errorLogger.addItemErrorLogger(xmlItem)
             self.errorLogger.endObjectList('authors-not-found')
 
@@ -215,7 +215,7 @@ class DataBaseInserts():
         if len(errorEditors) > 0:
             self.errorLogger.startObjectList('authors-not-found')
             for author in errorEditors:
-                self.errorLogger.addItemErrorLogger('<author-error>%s</author-error>' % author)
+                self.errorLogger.addItemErrorLogger(bytes('<author-error>%s</author-error>' % author, 'utf-8'))
             self.errorLogger.addItemErrorLogger(xmlItem)
             self.errorLogger.endObjectList('authors-not-found')
 

@@ -39,15 +39,16 @@ def insertResearchers(file, dbInserts, repoR, repoI, errorLog):
     rCrossRef = {}
     for event, item in ET.iterparse(xml, ["start", "end"], parser=Parser.parser()):
         if event == 'end':
-            try:
-                result = dbInserts.insertResearcher(item, repoR, repoI)
-                if result is not None and 'r_cross_ref' in result and 'r_key' in result:
-                    rCrossRef[result["r_cross_ref"]] = {'crossref': result["r_key"], 'item': ET.tostring(item)}
-            except:
-                exc_type, exc_value, exc_traceback = sys.exc_info()
-                errorLog.exceptionObject(exc_type.__name__, exc_value, exc_traceback)
-                errorLog.addItemErrorLogger(ET.tostring(item))
-            item.clear()
+            if item.tag == 'www':
+                try:
+                    result = dbInserts.insertResearcher(item, repoR, repoI)
+                    if result is not None and 'r_cross_ref' in result and 'r_key' in result:
+                        rCrossRef[result["r_cross_ref"]] = {'crossref': result["r_key"], 'item': ET.tostring(item)}
+                except:
+                    exc_type, exc_value, exc_traceback = sys.exc_info()
+                    errorLog.exceptionObject(exc_type.__name__, exc_value, exc_traceback)
+                    errorLog.addItemErrorLogger(ET.tostring(item))
+                item.clear()
     xml.close()
     errorLog.startObjectList('crossref-researchers')
     for key in rCrossRef:
