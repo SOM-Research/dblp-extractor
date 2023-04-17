@@ -93,7 +93,7 @@ CREATE TABLE authorships(
     researcher_id UUID,
     publication_id UUID,
     position int,
-    CONSTRAINT PK_authorships PRIMARY KEY (researcher_id,publication_id),
+    CONSTRAINT PK_authorships PRIMARY KEY (researcher_id,publication_id, position),
     FOREIGN KEY (researcher_id) REFERENCES researchers(id),
     FOREIGN KEY (publication_id) REFERENCES publications(id)
 );

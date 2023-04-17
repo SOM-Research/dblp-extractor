@@ -8,4 +8,4 @@ class Authorship(ModelBase):
     researcher: Mapped["Researcher"] = relationship("Researcher", back_populates="publications")
     publication_id = Column(UUID, ForeignKey("publications.id"),  primary_key=True)
     publication: Mapped["Publication"] = relationship("Publication", back_populates="authors")
-    position = Column(Integer)
+    position = Column(Integer, primary_key=True)

@@ -8,6 +8,7 @@ from sqlalchemy.orm import relationship, Mapped
 from model.PublicationElectronicEdition import PublicationElectronicEdition
 from model.PublicationType import PublicationType
 
+
 class Publication(ModelBase):
     __tablename__ = "publications"
 
@@ -40,12 +41,12 @@ class Publication(ModelBase):
         return self.type
 
     def calculatePages(self):
-        if self.pages is None:
-            return None
-        if self.pages.isnumeric():
-            self.num_pages = int(self.pages)
-        else:
-            try:
+        try:
+            if self.pages is None:
+                return None
+            if self.pages.isnumeric():
+                self.num_pages = int(self.pages)
+            else:
                 self.pages = self.pages.upper()
                 r1 = re.compile('[0-9]+-[0-9]+')
                 r2 = re.compile('[0-9]+:[0-9]+-[0-9]+:[0-9]+')
@@ -55,28 +56,41 @@ class Publication(ModelBase):
                 if self.type == PublicationType.book and rBook.match(self.pages):
                     splitPages = self.pages.split('-')
                     try:
-                        self.num_pages = int(splitPages[(len(splitPages)-1)])
+                        self.num_pages = int(splitPages[(len(splitPages) - 1)])
                     except:
                         print('exception occurred in calculated pages in book:', self.pages)
                 elif r1.match(self.pages):
                     self.num_pages = int(self.pages.split('-')[1]) - int(self.pages.split('-')[0])
                 elif r2.match(self.pages):
-                    self.num_pages = int(self.pages.split('-')[1].split(':')[1]) - int(self.pages.split('-')[0].split(':')[1])
+                    self.num_pages = int(self.pages.split('-')[1].split(':')[1]) - int(
+                        self.pages.split('-')[0].split(':')[1])
                 elif r3.match(self.pages):
-                    self.num_pages = int(roman.fromRoman(self.pages.split('-')[1])) - int(roman.fromRoman(self.pages.split('-')[0]))
+                    self.num_pages = int(roman.fromRoman(self.pages.split('-')[1])) - int(
+                        roman.fromRoman(self.pages.split('-')[0]))
                 elif r4.match(self.pages):
-                    self.num_pages = int(roman.fromRoman(self.pages.split('-')[1].split(':')[1])) - int(roman.fromRoman(self.pages.split('-')[0].split(':')[1]))
+                    self.num_pages = int(roman.fromRoman(self.pages.split('-')[1].split(':')[1])) - int(
+                        roman.fromRoman(self.pages.split('-')[0].split(':')[1]))
                 else:
-                    print("Pages not numeric nor calculable: ", self.pages)
-            except:
-                print('exception occurred in calculated pages:', self.pages)
+                    # print("Pages not numeric nor calculable: ", self.pages)
+                    self.num_pages = None
+        except:
+            # print('exception occurred in calculated pages:', self.pages)
+            self.num_pages = None
 
     def addElectronicEditions(self, electronicEditions):
         r = re.compile('https://doi\.org/.*')
         for ee in electronicEditions:
             if r.match(ee):
                 self.doi = ee
-            if ee not in self.electronic_editions:
-                self.electronic_editions.append(
-                    PublicationElectronicEdition(publication_id=self.id, publication=self, electronic_edition=ee)
-                )
+            if self.isInElectronicEditions(ee) is False:
+                self.electronic_editions.append(PublicationElectronicEdition(
+                    publication_id=self.id,
+                    publication=self,
+                    electronic_edition=ee.lower()
+                ))
+
+    def isInElectronicEditions(self, electronicEdition):
+        for ee in self.electronic_editions:
+            if ee.electronic_edition.lower() == electronicEdition.lower():
+                return True
+        return False

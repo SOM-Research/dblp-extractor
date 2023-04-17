@@ -23,7 +23,6 @@ class ErrorLogger:
         file.close()
 
     def exceptionObject(self, exc_type, exc_value, exc_traceback):
-        print(exc_type.__class__)
         file = open(self.filePath, 'ab')
         file.write(bytes(('<exception>'), 'ascii'))
         file.write(bytes('\n', 'ascii'))
