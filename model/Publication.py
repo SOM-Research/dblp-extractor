@@ -44,7 +44,8 @@ class Publication(ModelBase):
         try:
             if self.pages is None:
                 return None
-            if self.pages.isnumeric():
+            # Maximum size of an int in MariaDB is 2147483647
+            if self.pages.isnumeric() and int(self.pages) < 2147483647:
                 self.num_pages = int(self.pages)
             else:
                 self.pages = self.pages.upper()
@@ -55,10 +56,7 @@ class Publication(ModelBase):
                 rBook = re.compile('[MDCLXVI]+-[MDCLXVI]+, [0-9]+-[0-9]+')
                 if self.type == PublicationType.book and rBook.match(self.pages):
                     splitPages = self.pages.split('-')
-                    try:
-                        self.num_pages = int(splitPages[(len(splitPages) - 1)])
-                    except:
-                        print('exception occurred in calculated pages in book:', self.pages)
+                    self.num_pages = int(splitPages[(len(splitPages) - 1)])
                 elif r1.match(self.pages):
                     self.num_pages = int(self.pages.split('-')[1]) - int(self.pages.split('-')[0])
                 elif r2.match(self.pages):

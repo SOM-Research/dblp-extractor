@@ -197,17 +197,13 @@ def main():
             print('./data/'+xmlFiles['book'])
             insertPublicationsAndPublicationGroupsFromBook('./data/'+xmlFiles['book'], dbInserts, repoP, repoPG, repoPV, repoR, errorLog)
         # Publications
-        if "article" not in args.skip:
-            print('./data/'+xmlFiles['article'])
-            insertPublications('./data/'+xmlFiles['article'], dbInserts, repoP, repoPG, repoPV, repoR, errorLog)
+        if "inproceedings" not in args.skip:
+            print('./data/'+xmlFiles['inproceedings'])
+            insertPublications('./data/'+xmlFiles['inproceedings'], dbInserts, repoP, repoPG, repoPV, repoR, errorLog)
         # Publications
         if "incollection" not in args.skip:
             print('./data/'+xmlFiles['incollection'])
             insertPublications('./data/'+xmlFiles['incollection'], dbInserts, repoP, repoPG, repoPV, repoR, errorLog)
-        # Publications
-        if "inproceedings" not in args.skip:
-            print('./data/'+xmlFiles['inproceedings'])
-            insertPublications('./data/'+xmlFiles['inproceedings'], dbInserts, repoP, repoPG, repoPV, repoR, errorLog)
         # Publications
         if "mastersthesis" not in args.skip:
             print('./data/'+xmlFiles['mastersthesis'])
@@ -216,6 +212,10 @@ def main():
         if "phdthesis" not in args.skip:
             print('./data/'+xmlFiles['phdthesis'])
             insertPublications('./data/'+xmlFiles['phdthesis'], dbInserts, repoP, repoPG, repoPV, repoR, errorLog)
+        # Publications
+        if "article" not in args.skip:
+            print('./data/'+xmlFiles['article'])
+            insertPublications('./data/'+xmlFiles['article'], dbInserts, repoP, repoPG, repoPV, repoR, errorLog)
 
     # end error logger
     errorLog.endObjectList('errorlist')
