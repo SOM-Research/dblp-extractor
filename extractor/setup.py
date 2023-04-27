@@ -34,11 +34,14 @@ def splitXmlFile(file):
     xml.close()
 
 ### INSERT RESEARCHERS - WWW XML ITEM ###
-def insertResearchers(file, dbInserts, repoR, repoI, errorLog):
+def insertResearchers(file, dbInserts, repoR, repoI, errorLog, startKey):
     xml = open(file, 'r')
+    startKeyFound = True if startKey is None else False
     rCrossRef = {}
     for event, item in ET.iterparse(xml, ["start", "end"], parser=Parser.parser()):
         if event == 'end':
+            if item.attrib.get('key') == startKey:
+                startKeyFound = True
             if item.tag == 'www':
                 try:
                     result = dbInserts.insertResearcher(item, repoR, repoI)
@@ -56,12 +59,15 @@ def insertResearchers(file, dbInserts, repoR, repoI, errorLog):
     errorLog.endObjectList('crossref-researchers')
 
 ### INSERT PUBLICATION GROUP - PROCEEDINGS XML ITEM ###
-def insertPublicationGroupsFromProceedings(file, dbInserts, repoR, repoPG, repoPV, errorLog):
+def insertPublicationGroupsFromProceedings(file, dbInserts, repoR, repoPG, repoPV, errorLog, startKey):
     xml = open(file, 'r')
+    startKeyFound = True if startKey is None else False
     rCrossRef = {}
     pubResult = None
     for event, item in ET.iterparse(xml, ["start", "end"], parser=Parser.parser()):
         if event == 'end':
+            if item.attrib.get('key') == startKey:
+                startKeyFound = True
             if item.tag == 'proceedings':
                 try:
                     result = dbInserts.insertPublicationGroupFromXml(item, repoPG, repoPV, repoR)
@@ -75,10 +81,13 @@ def insertPublicationGroupsFromProceedings(file, dbInserts, repoR, repoPG, repoP
     xml.close()
 
 ### INSERT PUBLICATIONS AND PUBLICATION GROUPS - BOOK XML ITEM ###
-def insertPublicationsAndPublicationGroupsFromBook(file, dbInserts, repoP, repoPG, repoPV, repoR, errorLog):
+def insertPublicationsAndPublicationGroupsFromBook(file, dbInserts, repoP, repoPG, repoPV, repoR, errorLog, startKey):
     xml = open(file, 'r')
+    startKeyFound = True if startKey is None else False
     for event, item in ET.iterparse(xml, ["start", "end"], parser=Parser.parser()):
         if event == 'end':
+            if item.attrib.get('key') == startKey:
+                startKeyFound = True
             if item.tag == 'book':
                 childType = None
                 for child in item.iter():
@@ -101,16 +110,25 @@ def insertPublicationsAndPublicationGroupsFromBook(file, dbInserts, repoP, repoP
     xml.close()
 
 ### INSERT PUBLICATIONS - ARTICLE INCOLLECTION INPROCEEDINGS MASTERTHESIS AND PHDTHESIS XML ITEM ###
-def insertPublications(file, dbInserts, repoP, repoPG, repoPV, repoR, errorLog):
+def insertPublications(file, dbInserts, repoP, repoPG, repoPV, repoR, errorLog, startKey):
     xml = open(file, 'r')
+    startKeyFound = True if startKey is None else False
+    print(startKeyFound)
+    print(startKey)
     for event, item in ET.iterparse(xml, ["start", "end"], parser=Parser.parser()):
         if event == 'end':
-            if item.tag == 'article' \
-                    or item.tag == 'incollection'\
-                    or item.tag == 'inproceedings'\
-                    or item.tag == 'mastersthesis'\
-                    or item.tag == 'phdthesis':
+            print(item.attrib.get('key'))
+            if item.attrib.get('key') == startKey:
+                print("FOUND")
+                startKeyFound = True
+            if startKeyFound is True and \
+                    (item.tag == 'article'
+                     or item.tag == 'incollection'
+                     or item.tag == 'inproceedings'
+                     or item.tag == 'mastersthesis'
+                     or item.tag == 'phdthesis'):
                 try:
+                    print('ok--')
                     pubResult = dbInserts.insertPublicationFromXML(item, repoP, repoPG, repoPV, repoR)
                 except:
                     exc_type, exc_value, exc_traceback = sys.exc_info()
@@ -142,6 +160,7 @@ def main():
     parser.add_argument('--xml', type=str, help='File path for xml raw data')
     parser.add_argument('--splitXml', type=bool, help='Set True if want to split XML by main tags')
     parser.add_argument('--insert', type=bool, help='Insert the xml data into database')
+    parser.add_argument('--startInsertIn', type=str, help='Start insert items from key given and split file; format like "inproceedings:conf/desrist/BollojuS09"')
     parser.add_argument('--skip', nargs='*', help='Skip a kind of data. Options: ["article", "book", "incollection", "inproceedings", "mastersthesis", "phdthesis", "proceedings", "www"]')
     args = parser.parse_args()
 
@@ -183,39 +202,68 @@ def main():
     if args.skip is None:
         args.skip = []
 
+    section = None
+    startInsertIn = None
+    if args.startInsertIn is not None:
+        section, startInsertIn = args.startInsertIn.split(':')
+
     if xmlFiles is not None:
         # Researchers
         if "www" not in args.skip:
             print('./data/'+xmlFiles['www'])
-            insertResearchers('./data/'+xmlFiles['www'], dbInserts, repoR, repoI, errorLog)
+            if "www" == section:
+                insertResearchers('./data/'+xmlFiles['www'], dbInserts, repoR, repoI, errorLog, startInsertIn)
+            else:
+                insertResearchers('./data/'+xmlFiles['www'], dbInserts, repoR, repoI, errorLog, None)
         # Publication groups
         if "proceedings" not in args.skip:
             print('./data/'+xmlFiles['proceedings'])
-            insertPublicationGroupsFromProceedings('./data/'+xmlFiles['proceedings'], dbInserts, repoR, repoPG, repoPV, errorLog)
+            if "proceedings" == section:
+                insertPublicationGroupsFromProceedings('./data/'+xmlFiles['proceedings'], dbInserts, repoR, repoPG, repoPV, errorLog, startInsertIn)
+            else:
+                insertPublicationGroupsFromProceedings('./data/'+xmlFiles['proceedings'], dbInserts, repoR, repoPG, repoPV, errorLog, None)
         # Publication groups and publications
         if "book" not in args.skip:
             print('./data/'+xmlFiles['book'])
-            insertPublicationsAndPublicationGroupsFromBook('./data/'+xmlFiles['book'], dbInserts, repoP, repoPG, repoPV, repoR, errorLog)
+            if "book" == section:
+                insertPublicationsAndPublicationGroupsFromBook('./data/'+xmlFiles['book'], dbInserts, repoP, repoPG, repoPV, repoR, errorLog, startInsertIn)
+            else:
+                insertPublicationsAndPublicationGroupsFromBook('./data/'+xmlFiles['book'], dbInserts, repoP, repoPG, repoPV, repoR, errorLog, None)
         # Publications
         if "inproceedings" not in args.skip:
             print('./data/'+xmlFiles['inproceedings'])
-            insertPublications('./data/'+xmlFiles['inproceedings'], dbInserts, repoP, repoPG, repoPV, repoR, errorLog)
+            if "inproceedings" == section:
+                insertPublications('./data/'+xmlFiles['inproceedings'], dbInserts, repoP, repoPG, repoPV, repoR, errorLog, startInsertIn)
+            else:
+                insertPublications('./data/'+xmlFiles['inproceedings'], dbInserts, repoP, repoPG, repoPV, repoR, errorLog, None)
         # Publications
         if "incollection" not in args.skip:
             print('./data/'+xmlFiles['incollection'])
-            insertPublications('./data/'+xmlFiles['incollection'], dbInserts, repoP, repoPG, repoPV, repoR, errorLog)
+            if "inproceedings" == section:
+                insertPublications('./data/'+xmlFiles['incollection'], dbInserts, repoP, repoPG, repoPV, repoR, errorLog, startInsertIn)
+            else:
+                insertPublications('./data/'+xmlFiles['incollection'], dbInserts, repoP, repoPG, repoPV, repoR, errorLog, None)
         # Publications
         if "mastersthesis" not in args.skip:
             print('./data/'+xmlFiles['mastersthesis'])
-            insertPublications('./data/'+xmlFiles['mastersthesis'], dbInserts, repoP, repoPG, repoPV, repoR, errorLog)
+            if "inproceedings" == section:
+                insertPublications('./data/'+xmlFiles['mastersthesis'], dbInserts, repoP, repoPG, repoPV, repoR, errorLog, startInsertIn)
+            else:
+                insertPublications('./data/'+xmlFiles['mastersthesis'], dbInserts, repoP, repoPG, repoPV, repoR, errorLog, None)
         # Publications
         if "phdthesis" not in args.skip:
             print('./data/'+xmlFiles['phdthesis'])
-            insertPublications('./data/'+xmlFiles['phdthesis'], dbInserts, repoP, repoPG, repoPV, repoR, errorLog)
+            if "inproceedings" == section:
+                insertPublications('./data/'+xmlFiles['phdthesis'], dbInserts, repoP, repoPG, repoPV, repoR, errorLog, startInsertIn)
+            else:
+                insertPublications('./data/'+xmlFiles['phdthesis'], dbInserts, repoP, repoPG, repoPV, repoR, errorLog, None)
         # Publications
         if "article" not in args.skip:
             print('./data/'+xmlFiles['article'])
-            insertPublications('./data/'+xmlFiles['article'], dbInserts, repoP, repoPG, repoPV, repoR, errorLog)
+            if "inproceedings" == section:
+                insertPublications('./data/'+xmlFiles['article'], dbInserts, repoP, repoPG, repoPV, repoR, errorLog, startInsertIn)
+            else:
+                insertPublications('./data/'+xmlFiles['article'], dbInserts, repoP, repoPG, repoPV, repoR, errorLog, None)
 
     # end error logger
     errorLog.endObjectList('errorlist')
