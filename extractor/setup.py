@@ -14,8 +14,11 @@ from database.orm.PublicationGroupRepository import PublicationGroupRepository
 from extractor.DataBaseInserts import DataBaseInserts
 from extractor.ErrorLogger import ErrorLogger
 
-###  SPLIT XML FILE ###
 def splitXmlFile(file):
+    """
+    Split the dblp xml into eight xml file by classes
+    :param file: filepath where is the xml
+    """
     xml = open(file, 'r')
     baseFilesPath = './data/split_%s_'+str(date.today())+'.xml'
     xmlFiles = {"article": None, "book": None, "incollection": None, "inproceedings": None, "mastersthesis": None, "phdthesis": None, "proceedings": None, "www": None}
@@ -33,8 +36,16 @@ def splitXmlFile(file):
         xmlFiles[splitFile].close()
     xml.close()
 
-### INSERT RESEARCHERS - WWW XML ITEM ###
 def insertResearchers(file, dbInserts, repoR, repoI, errorLog, startKey):
+    """
+    From a file with only www items, insert them into database
+    :param file: www xml file path
+    :param dbInserts: DBInserts is class to help the insertion
+    :param repoR: Researcher Repository
+    :param repoI: Institution Repository
+    :param errorLog: Error Logger class
+    :param startKey: A xml key to start from
+    """
     xml = open(file, 'r')
     startKeyFound = True if startKey is None else False
     rCrossRef = {}
@@ -42,9 +53,9 @@ def insertResearchers(file, dbInserts, repoR, repoI, errorLog, startKey):
         if event == 'end':
             if item.attrib.get('key') == startKey:
                 startKeyFound = True
-            if item.tag == 'www':
+            if item.tag == 'www' and startKeyFound is True:
                 try:
-                    result = dbInserts.insertResearcher(item, repoR, repoI)
+                    result = dbInserts.insertResearcherFromXML(item, repoR, repoI)
                     if result is not None and 'r_cross_ref' in result and 'r_key' in result:
                         rCrossRef[result["r_cross_ref"]] = {'crossref': result["r_key"], 'item': ET.tostring(item)}
                 except:
@@ -55,20 +66,28 @@ def insertResearchers(file, dbInserts, repoR, repoI, errorLog, startKey):
     xml.close()
     errorLog.startObjectList('crossref-researchers')
     for key in rCrossRef:
-        dbInserts.insertKeyFromCrossRefResearchers(key, rCrossRef[key]['crossref'], rCrossRef[key]['item'], repoR, errorLog)
+        dbInserts.insertKeyFromCrossRefResearchers(key, rCrossRef[key]['crossref'], rCrossRef[key]['item'], repoR)
     errorLog.endObjectList('crossref-researchers')
 
-### INSERT PUBLICATION GROUP - PROCEEDINGS XML ITEM ###
 def insertPublicationGroupsFromProceedings(file, dbInserts, repoR, repoPG, repoPV, errorLog, startKey):
+    """
+    Insert publication groups from proceedings xml file
+    :param file: proceedings xml file path
+    :param dbInserts: DBInserts is class to help the insertion
+    :param repoR: Researcher Repository
+    :param repoPG: PublicationGroup Repository
+    :param repoPV: PublicationVenue Repository
+    :param errorLog: Error Logger class
+    :param startKey: A xml key to start from
+    """
     xml = open(file, 'r')
     startKeyFound = True if startKey is None else False
     rCrossRef = {}
-    pubResult = None
     for event, item in ET.iterparse(xml, ["start", "end"], parser=Parser.parser()):
         if event == 'end':
             if item.attrib.get('key') == startKey:
                 startKeyFound = True
-            if item.tag == 'proceedings':
+            if item.tag == 'proceedings' and startKeyFound is True:
                 try:
                     result = dbInserts.insertPublicationGroupFromXml(item, repoPG, repoPV, repoR)
                     if result is not None and "r_cross_ref" in result:
@@ -80,15 +99,25 @@ def insertPublicationGroupsFromProceedings(file, dbInserts, repoR, repoPG, repoP
                 item.clear()
     xml.close()
 
-### INSERT PUBLICATIONS AND PUBLICATION GROUPS - BOOK XML ITEM ###
 def insertPublicationsAndPublicationGroupsFromBook(file, dbInserts, repoP, repoPG, repoPV, repoR, errorLog, startKey):
+    """
+    Insert publications and publication groups from book xml file
+    :param file: book xml file path
+    :param dbInserts: DBInserts is class to help the insertion
+    :param repoP: Publication Repository
+    :param repoPG: PublicationGroup Repository
+    :param repoPV: PublicationVenue Repository
+    :param repoR: Researcher Repository
+    :param errorLog: Error Logger class
+    :param startKey: A xml key to start from
+    """
     xml = open(file, 'r')
     startKeyFound = True if startKey is None else False
     for event, item in ET.iterparse(xml, ["start", "end"], parser=Parser.parser()):
         if event == 'end':
             if item.attrib.get('key') == startKey:
                 startKeyFound = True
-            if item.tag == 'book':
+            if item.tag == 'book' and startKeyFound is True:
                 childType = None
                 for child in item.iter():
                     # Could be more than one editor or author; but never editors AND authors are mixed.
@@ -109,17 +138,24 @@ def insertPublicationsAndPublicationGroupsFromBook(file, dbInserts, repoP, repoP
                 item.clear()
     xml.close()
 
-### INSERT PUBLICATIONS - ARTICLE INCOLLECTION INPROCEEDINGS MASTERTHESIS AND PHDTHESIS XML ITEM ###
 def insertPublications(file, dbInserts, repoP, repoPG, repoPV, repoR, errorLog, startKey):
+    """
+    Insert Publications from files with article, incollection, inproceedings, mastersthesis or phdthesis items
+    :param file: xml file path
+    :param dbInserts: DBInserts is class to help the insertion
+    :param repoP: Publication Repository
+    :param repoPG: PublicationGroup Repository
+    :param repoPV: PublicationVenue Repository
+    :param repoR: Researcher Repository
+    :param errorLog: Error Logger class
+    :param startKey: A xml key to start from
+    """
     xml = open(file, 'r')
     startKeyFound = True if startKey is None else False
-    print(startKeyFound)
-    print(startKey)
     for event, item in ET.iterparse(xml, ["start", "end"], parser=Parser.parser()):
         if event == 'end':
             print(item.attrib.get('key'))
             if item.attrib.get('key') == startKey:
-                print("FOUND")
                 startKeyFound = True
             if startKeyFound is True and \
                     (item.tag == 'article'
@@ -128,7 +164,6 @@ def insertPublications(file, dbInserts, repoP, repoPG, repoPV, repoR, errorLog, 
                      or item.tag == 'mastersthesis'
                      or item.tag == 'phdthesis'):
                 try:
-                    print('ok--')
                     pubResult = dbInserts.insertPublicationFromXML(item, repoP, repoPG, repoPV, repoR)
                 except:
                     exc_type, exc_value, exc_traceback = sys.exc_info()
@@ -137,8 +172,11 @@ def insertPublications(file, dbInserts, repoP, repoPG, repoPV, repoR, errorLog, 
                 item.clear()
     xml.close()
 
-### FIND SPLITED XML FILES ###
 def getSplitXmlFiles():
+    """
+    Search split xml files t
+    :return: array with each newest xml files started by split
+    """
     dataPath = './data/'
     files = [f for f in os.listdir(dataPath) if os.path.isfile(os.path.join(dataPath, f)) and (f.startswith('split_') and f.endswith('.xml'))]
     if len(files) > 0:
@@ -152,6 +190,9 @@ def getSplitXmlFiles():
     return None
 
 def main():
+    """
+    Main function to execute the setup
+    """
     ###             ###
     #   Arguments     #
     ###             ###
@@ -159,7 +200,6 @@ def main():
     parser.add_argument('--ddl', type=str, help='File path for DDL')
     parser.add_argument('--xml', type=str, help='File path for xml raw data')
     parser.add_argument('--splitXml', type=bool, help='Set True if want to split XML by main tags')
-    parser.add_argument('--insert', type=bool, help='Insert the xml data into database')
     parser.add_argument('--startInsertIn', type=str, help='Start insert items from key given and split file; format like "inproceedings:conf/desrist/BollojuS09"')
     parser.add_argument('--skip', nargs='*', help='Skip a kind of data. Options: ["article", "book", "incollection", "inproceedings", "mastersthesis", "phdthesis", "proceedings", "www"]')
     args = parser.parse_args()

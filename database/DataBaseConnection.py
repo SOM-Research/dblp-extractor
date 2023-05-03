@@ -11,6 +11,10 @@ class DataBaseConnection():
         self.session = None
 
     def config(self):
+        """
+        Get the configuration file
+        :return:
+        """
         configFile = open("./config/config.yaml", "r")
         return yaml.load(configFile, yaml.Loader)
 
@@ -29,10 +33,18 @@ class DataBaseConnection():
         return conn
 
     def connect(self):
+        """
+        Connect to the DB
+        :return: DataBase Connection
+        """
         conn = self.connection()
         return conn.cursor()
 
     def createDatabaseFromDDL(self, filePath):
+        """
+        Create a DataBase from a DDL file given
+        :param filePath: DDL file
+        """
         db = self.connect()
         ddlFile = open(filePath)
         for line in ddlFile.read().split(';'):
@@ -44,6 +56,10 @@ class DataBaseConnection():
         ddlFile.close()
 
     def alchemySession(self):
+        """
+        Start a Alchemy Session or return the curren session
+        :return: Alchemy Session
+        """
         if self.session is None:
             cfg = self.config()
             txt = "mariadb+mariadbconnector://" + cfg['db']['user'] + ":" + cfg['db']['password'] + "@" + cfg['db'][

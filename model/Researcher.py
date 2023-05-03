@@ -28,18 +28,37 @@ class Researcher(ModelBase):
     publication_groups: Mapped[List["Editor"]] = relationship(back_populates="researcher")
 
     def orcidRegEx(self):
+        """
+        Regular Expression to identify an Orcid identifier
+        :return: a regular expression class.
+        """
         return re.compile('([0-9][0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]-[0-9][0-9][0-9]([0-9]|X))')
 
     def orcidUrlRegEx(self):
+        """
+        Regular Expression to identify an Orcid URL
+        :return: a regular expression class.
+        """
         return re.compile('https://orcid\.org/.*')
 
     def addOrcid(self, orcid):
+        """
+        Add an Orcid, could be in an identifier or url format
+        :param orcid: Orcid string as identifier or url
+        :return: orcid identifier
+        """
         if self.orcidRegEx().match(orcid):
             self.orcid = orcid
-            return orcid
+            return self.orcid
         if self.orcidUrlRegEx().match(orcid):
             self.orcid = re.search(self.orcidRegEx(), orcid).group(1)
+            return self.orcid
 
     def updateCurrentAlias(self, currentAlias, year):
+        """
+        Updates the current Alias from last year saved.
+        :param currentAlias: current Alias changed.
+        :param year: Year from new current alias.
+        """
         self.current_alias = currentAlias
         self.last_year_current_alias = year

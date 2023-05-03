@@ -28,6 +28,12 @@ class Publication(ModelBase):
     publication_group: Mapped["PublicationGroup"] = relationship(back_populates="publications")
 
     def setType(self, type):
+        """
+        Set publication type
+        :param type: Publication type
+        :return: PublicationType
+        todo: refactor first if to get a better control.
+        """
         if type is not None:
             self.type = PublicationType.book
             return self.type
@@ -41,6 +47,10 @@ class Publication(ModelBase):
         return self.type
 
     def calculatePages(self):
+        """
+        Calculate number of pages from pages.
+        :return: int - number of pages
+        """
         try:
             if self.pages is None:
                 return None
@@ -76,6 +86,10 @@ class Publication(ModelBase):
             self.num_pages = None
 
     def addElectronicEditions(self, electronicEditions):
+        """
+        Add an array of Electronic Editions in electronic editions array
+        :param electronicEditions: electronicEditions
+        """
         r = re.compile('https://doi\.org/.*')
         for ee in electronicEditions:
             if r.match(ee):
@@ -88,6 +102,11 @@ class Publication(ModelBase):
                 ))
 
     def isInElectronicEditions(self, electronicEdition):
+        """
+        Check if an electronic edition is in array ignoring the string case.
+        :param electronicEdition: electronic edition to check
+        :return: Boolean - True if exists this electronic edition in the array otherwise False.
+        """
         for ee in self.electronic_editions:
             if ee.electronic_edition.lower() == electronicEdition.lower():
                 return True

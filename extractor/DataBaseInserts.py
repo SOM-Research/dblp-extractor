@@ -9,7 +9,14 @@ class DataBaseInserts():
         self.session = alchemySession
         self.errorLogger = errorLogger
 
-    def insertResearcher(self, item, repoResearcher, repoInst):
+    def insertResearcherFromXML(self, item, repoResearcher, repoInst):
+        """
+        Insdert a www item as a Researcher
+        :param item: www item to be interted into database
+        :param repoResearcher: Researcher Repository
+        :param repoInst: Institution Repository
+        :rtype: object
+        """
         key = item.attrib.get('key')
         mdate = item.attrib.get('mdate')
         xmlItem = ET.tostring(item)
@@ -56,15 +63,31 @@ class DataBaseInserts():
         return {"researcher": researcher}
 
 
-    def insertKeyFromCrossRefResearchers(self, key, crosRef, item, repoResercher, errorLog):
+    def insertKeyFromCrossRefResearchers(self, key, crossRef, item, repoResercher):
+        """
+        Insert other xml key to Researcher
+        :param key: The original xml key
+        :param crossRef: the other xml key
+        :param item: www item which has the reference
+        :param repoResercher: Researcher Repository
+        """
         r = repoResercher.getOneByXmlKey(key)
         if r is not None:
-            r.xml_cross_reference.append(XmlKey(researcher_id=r.id, xml_key=crosRef))
+            r.xml_cross_reference.append(XmlKey(researcher_id=r.id, xml_key=crossRef))
             repoResercher.updateResearcher(r)
         else:
-            errorLog.addItemErrorLogger(item)
+            self.errorLogger.addItemErrorLogger(item)
 
     def insertPublicationFromXML(self, item, repoP, repoPG, repoPV, repoR):
+        """
+        Insert an item from xml as a Publication
+        :param item: the xml item to insert as a Publication
+        :param repoP: Publication Repository
+        :param repoPG: PublicationGroup Repository
+        :param repoPV: PublicationVenue Repository
+        :param repoR: Researcher Repository
+        :return: object
+        """
         key = item.attrib.get('key')
         mdate = item.attrib.get('mdate')
         xmlItem = ET.tostring(item)
@@ -162,6 +185,14 @@ class DataBaseInserts():
         return {'publication': publication}
 
     def insertPublicationGroupFromXml(self, item, repoPG, repoPV, repoR):
+        """
+        Insert a xml item as a PublicationGroup
+        :param item: proceedings or book xml item
+        :param repoPG: PublicationGroup Repository
+        :param repoPV: PublicationVenue Repository
+        :param repoR: Researcher Repository
+        :return: object
+        """
         uuid = uuid4()
         title = None
         publisher = None

@@ -6,7 +6,6 @@ import re
 
 from model.PublicationGroupElectronicEdition import PublicationGroupElectronicEdition
 
-
 class PublicationGroup(ModelBase):
     __tablename__ = "publication_groups"
     id = Column(UUID, primary_key=True)
@@ -28,11 +27,18 @@ class PublicationGroup(ModelBase):
     electronic_editions: Mapped[List["PublicationGroupElectronicEdition"]] = relationship(back_populates="publication_group")
     publications: Mapped[List["Publication"]] = relationship(back_populates="publication_group")
 
-
     def addElectronicEditions(self, electronicEditions):
+        """
+        Add a group of electronic editions to the electronic editions class array
+        :param electronicEditions: electronic editions array to add
+        """
         r = re.compile('https://doi\.org/.*')
         for ee in electronicEditions:
-            eeItem = PublicationGroupElectronicEdition(publication_group_id=self.id, publication_group=self, electronic_edition=ee)
+            eeItem = PublicationGroupElectronicEdition(
+                publication_group_id=self.id,
+                publication_group=self,
+                electronic_edition=ee.lower()
+            )
             if r.match(ee):
                 self.doi = ee
             if eeItem not in self.electronic_editions:

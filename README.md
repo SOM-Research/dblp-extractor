@@ -33,8 +33,11 @@ name (now *metascience*) is changed; should be changed in ddl file as well.
 3. Execute *setup.py*; in the first time you should add at least --ddl and --xml arguments:
    1. --ddl argument is for ddl file.
    2. --xml argument is for xml file.
-   3. --splitXml needs a xml file and splits this file by first level xml children.
-   4. --insert needs a xml file and is aim to insert all xml data into database.
+   3. --splitXml needs a xml file and splits this file by first level xml children: in the eight xml classes.
+   4. --startInsertIn to start in a point in a split xml file. Needs a string with two parts like 
+   "inproceedings:conf/desrist/BollojuS09".The first part of the string is for identify which class 
+   is going to affect. The second is the xml_key which is the first item to insert.  
+   5. --skip Needs at least one string. Skips a xml split file which should be the same as one or more of the xml classes.
 
     This is to only creates database:
     ```console

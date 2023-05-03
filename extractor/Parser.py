@@ -1,6 +1,10 @@
 import xml.etree.ElementTree as ET
 
 def parser():
+    """
+    Parser to all special characters
+    :return: a xml Parser
+    """
     parser = ET.XMLParser()
     parser.entity["Agrave"] = "À"
     parser.entity["Aacute"] = "Á"
