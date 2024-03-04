@@ -1,0 +1,21 @@
+services:
+  app:
+    build: .
+    ports:
+      - "8000:5000"
+    volumes:
+      - "app:/code"
+  db:
+    mem_limit: "32g"
+    shm_size: '32gb'
+    image: "postgres"
+    volumes:
+      - "./database:/data"
+      - "./dataextraction:/extraction"
+    environment:
+      POSTGRES_PASSWORD: ${DB_ROOT_PASS}
+volumes:
+  app:
+    driver: local
+  db:
+    driver: local
