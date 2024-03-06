@@ -20,14 +20,14 @@ BEGIN{
   n_phdthesis = 0
   n_incollection = 0
 
-  f_article = "../data/formatted/article/article.xml";
-  f_www = "../data/formatted/www/www.xml";
-  f_book = "../data/formatted/book/book.xml";
-  f_proceedings = "../data/formatted/proceedings/proceedings.xml";
-  f_inproceedings = "../data/formatted/inproceedings/inproceedings.xml";
-  f_mastersthesis = "../data/formatted/mastersthesis/mastersthesis.xml";
-  f_phdthesis = "../data/formatted/phdthesis/phdthesis.xml";
-  f_incollection = "../data/formatted/incollection/incollection.xml";
+  f_article = "./data/formatted/article/article.xml";
+  f_www = "./data/formatted/www/www.xml";
+  f_book = "./data/formatted/book/book.xml";
+  f_proceedings = "./data/formatted/proceedings/proceedings.xml";
+  f_inproceedings = "./data/formatted/inproceedings/inproceedings.xml";
+  f_mastersthesis = "./data/formatted/mastersthesis/mastersthesis.xml";
+  f_phdthesis = "./data/formatted/phdthesis/phdthesis.xml";
+  f_incollection = "./data/formatted/incollection/incollection.xml";
 
 
   f = f_article;
@@ -177,13 +177,4 @@ END {
   f = f_incollection
   print "</db>" > f;
   close(f);
-
-  print itemcount_article
-  print itemcount_www
-  print itemcount_book
-  print itemcount_proceedings
-  print itemcount_inproceedings
-  print itemcount_mastersthesis
-  print itemcount_phdthesis
-  print itemcount_incollection
 }
