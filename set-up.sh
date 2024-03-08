@@ -38,9 +38,12 @@ more readible ones and the split splits the xml in 8 different xml documents by 
 The spacemaker and the parser could execute in different order but the split must be the last one to be
 executed, otherwise we should execute the other awks for each xml split.
 '
-dblp_xml=${last_release::${#last_release}-3}
+dblp_xml=${last_release%".gz"}
 dblp_spaced="dblp_spaced.xml"
 dblp_parsed="dblp_parsed.xml"
+
+echo "Spaced = ./data/$dblp_spaced"
+echo "Parsed = ./data/$dblp_parsed"
 
 awk -f ./data-formation/spacemaker.awk ./data/$dblp_xml > ./data/$dblp_spaced
 awk -f ./data-formation/parser.awk ./data/$dblp_spaced > ./data/$dblp_parsed
