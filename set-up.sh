@@ -22,7 +22,7 @@ mkdir -p ./data/formatted/article
 mkdir -p ./data/formatted/book
 mkdir -p ./data/formatted/incollection
 mkdir -p ./data/formatted/inproceedings
-mkdir -p ./data/formatted/masterthesis
+mkdir -p ./data/formatted/mastersthesis
 mkdir -p ./data/formatted/phdthesis
 mkdir -p ./data/formatted/proceedings
 mkdir -p ./data/formatted/www
