@@ -14,6 +14,18 @@ gzip -d ./data/$last_release
 echo "DBLP xml downloaded and uncompressed"
 
 : '
+Create directories to save split xml
+'
+mkdir -p ./data/formatted/article
+mkdir -p ./data/formatted/book
+mkdir -p ./data/formatted/incollection
+mkdir -p ./data/formatted/inproceedings
+mkdir -p ./data/formatted/masterthesis
+mkdir -p ./data/formatted/phdthesis
+mkdir -p ./data/formatted/proceedings
+mkdir -p ./data/formatted/www
+
+: '
 Then we are formatting and splitting the xml.
 The order of awk executions are:
 - spacemaker
@@ -24,6 +36,7 @@ more readible ones and the split splits the xml in 8 different xml documents by 
 The spacemaker and the parser could execute in different order but the split must be the last one to be
 executed, otherwise we should execute the other awks for each xml split.
 '
+
 dblp_xml=${last_release::${#last_release}-3}
 dblp_spaced="dblp_spaced.xml"
 dblp_parsed="dblp_parsed.xml"
