@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 CURL="/usr/bin/curl"
 dblp_url="https://dblp.org/xml/release/"
 
@@ -9,7 +9,7 @@ We are going to download dblp xml and uncompress it.
 last_release=$($CURL $dblp_url | awk -f ./data-formation/last-dblp-xml.awk )
 echo "last release is: $last_release"
 last_release_url="$dblp_url$last_release"
-echo "last release URL is: $last_release"
+echo "last release URL is: $last_release_url"
 $CURL $last_release_url > ./data/$last_release
 gzip -d ./data/$last_release
 
@@ -38,7 +38,6 @@ more readible ones and the split splits the xml in 8 different xml documents by 
 The spacemaker and the parser could execute in different order but the split must be the last one to be
 executed, otherwise we should execute the other awks for each xml split.
 '
-
 dblp_xml=${last_release::${#last_release}-3}
 dblp_spaced="dblp_spaced.xml"
 dblp_parsed="dblp_parsed.xml"
