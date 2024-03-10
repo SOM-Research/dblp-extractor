@@ -6,8 +6,8 @@ services:
     volumes:
       - "app:/code"
   db:
-    mem_limit: "16g"
-    shm_size: '16gb'
+    mem_limit: "32"
+    shm_size: '32gb'
     image: "postgres"
     volumes:
       - "./database:/database"
