@@ -4,6 +4,11 @@ CREATE DATABASE metascience;
 
 \c metascience;
 
+CREATE TABLE oid_xml (
+    oid INT PRIMARY KEY,
+    xml varchar(255)
+);
+
 CREATE TABLE researchers (
     uuid UUID PRIMARY KEY,
     current_alias varchar(255),
@@ -19,7 +24,7 @@ CREATE TABLE researchers (
 -- ALTER TABLE researcher_names CHARACTER SET utf8 COLLATE utf8_bin;
 -- ALTER TABLE researcher_names CONVERT TO CHARACTER SET utf8 COLLATE utf8_bin;
 
-CREATE TYPE publication_venues_type as ENUM ('journal', 'conference', 'book');
+CREATE TYPE publication_venues_type as ENUM ('journal', 'conference', 'book', 'unknown');
 
 CREATE TABLE publication_venues(
     uuid UUID PRIMARY KEY,
@@ -27,15 +32,18 @@ CREATE TABLE publication_venues(
     type publication_venues_type
 );
 
+ALTER TABLE publication_venues ADD CONSTRAINT publication_venues_name_unique UNIQUE (name);
+
 CREATE INDEX p_venue_names_index ON publication_venues(name);
 
 CREATE TABLE publication_groups(
     uuid UUID PRIMARY KEY,
     title TEXT,
+    editors TEXT[],
     publication_venue UUID,
     publisher varchar(255),
     year int,
-    isbn varchar(255),
+    isbn TEXT[],
     doi varchar (255),
     booktitle TEXT,
     serie varchar(255),

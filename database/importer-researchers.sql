@@ -2,6 +2,8 @@
 
 \lo_import '/data/formatted/www/www.xml'
 
+    INSERT INTO oid_xml values (:LASTOID, 'www.xml');
+
     INSERT INTO researchers
         SELECT
         gen_random_uuid(),
@@ -16,6 +18,6 @@
     FROM unnest(
         xpath
         (    '//www'
-            ,XMLPARSE(DOCUMENT convert_from(lo_get(:LASTOID), 'LATIN1'))
+            ,XMLPARSE(DOCUMENT convert_from(lo_get((SELECT oid FROM oid_xml WHERE xml = 'www.xml' ORDER BY oid DESC LIMIT 1)), 'LATIN1'))
         )
     ) AS tempTable(tempColumn);
