@@ -16,9 +16,6 @@ services:
     environment:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: ${DB_NAME}
-      LANGUAGE: 'de_DE.UTF-8'
-      LC_ALL: 'de_DE.UTF-8'
-      LANG: 'de_DE.UTF-8'
 volumes:
   app:
     driver: local
