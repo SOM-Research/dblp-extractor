@@ -6,7 +6,8 @@ CREATE DATABASE metascience;
 
 CREATE TABLE oid_xml (
     oid INT PRIMARY KEY,
-    xml varchar(255)
+    xml varchar(255),
+    created_at TIMESTAMPTZ DEFAULT Now()
 );
 
 CREATE TABLE researchers (
@@ -45,10 +46,12 @@ CREATE TABLE publication_groups(
     year int,
     isbn TEXT[],
     doi varchar (255),
+    crossref varchar (255),
     booktitle TEXT,
     serie varchar(255),
     volume varchar(255),
     number varchar(255),
+    electronic_edition TEXT[],
     xml_key VARCHAR(255),
     xml_mdate DATE,
     xml_item TEXT,
@@ -57,17 +60,20 @@ CREATE TABLE publication_groups(
 CREATE INDEX p_group_title_index ON publication_groups(title);
 CREATE INDEX p_group_xml_key_index ON publication_groups(xml_key);
 
-CREATE TYPE publications_type as ENUM ('journal','thesis', 'conference', 'book');
+CREATE TYPE publications_type as ENUM ('journal','thesis', 'conference', 'book', 'unknown');
 
 CREATE TABLE publications(
     uuid UUID PRIMARY KEY,
     type publications_type,
     publication_group_uuid UUID,
     title TEXT,
+    authors TEXT[],
     year int,
     doi varchar(255),
+    crossref varchar (255),
     pages varchar(255),
     num_pages int,
+    electronic_edition TEXT[],
     xml_key VARCHAR(255),
     xml_mdate DATE,
     xml_item TEXT,
@@ -76,15 +82,6 @@ CREATE TABLE publications(
 CREATE INDEX publication_type_index ON publications(type);
 CREATE INDEX publication_title_index ON publications(title);
 CREATE INDEX publication_xml_key_index ON publications(xml_key);
-
-CREATE TABLE publication_electronic_editions(
-    publication_uuid UUID,
-    electronic_edition VARCHAR(255),
-    CONSTRAINT PK_publication_electronic_editions PRIMARY KEY (publication_uuid,electronic_edition),
-    FOREIGN KEY (publication_uuid) REFERENCES publications(uuid)
-);
-
-CREATE INDEX publication_ee_index ON publication_electronic_editions(electronic_edition);
 
 CREATE TABLE authorships(
     researcher_uuid UUID,
@@ -103,16 +100,6 @@ CREATE TABLE editors(
     FOREIGN KEY (researcher_uuid) REFERENCES researchers(uuid),
     FOREIGN KEY (publication_group_uuid) REFERENCES publication_groups(uuid)
 );
-
-
-CREATE TABLE publication_group_electronic_editions(
-    publication_group_uuid UUID,
-    electronic_edition VARCHAR(255),
-    CONSTRAINT PK_publication_group_electronic_editions PRIMARY KEY (publication_group_uuid,electronic_edition),
-    FOREIGN KEY (publication_group_uuid) REFERENCES publication_groups(uuid)
-);
-
-CREATE INDEX p_group_ee_index ON publication_group_electronic_editions(electronic_edition);
 
 CREATE TABLE institutions(
     uuid UUID PRIMARY KEY,

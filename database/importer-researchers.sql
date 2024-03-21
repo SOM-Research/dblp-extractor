@@ -1,8 +1,8 @@
 \c metascience;
 
-\lo_import '/data/formatted/www/www.xml'
+\lo_import :v1;
 
-    INSERT INTO oid_xml values (:LASTOID, 'www.xml');
+    INSERT INTO oid_xml values (:LASTOID, 'www.xml', NOW());
 
     INSERT INTO researchers
         SELECT
@@ -16,8 +16,8 @@
         to_date((xpath('//@mdate', tempTable.tempColumn))[1]::text, 'YYYY-MM-DD'),
         tempTable.tempColumn
     FROM unnest(
-        xpath
+      xpath
         (    '//www'
-            ,XMLPARSE(DOCUMENT convert_from(lo_get((SELECT oid FROM oid_xml WHERE xml = 'www.xml' ORDER BY oid DESC LIMIT 1)), 'LATIN1'))
+            ,XMLPARSE(DOCUMENT convert_from(lo_get((SELECT oid FROM oid_xml WHERE xml = 'www.xml' ORDER BY created_at DESC LIMIT 1)), 'LATIN1'))
         )
     ) AS tempTable(tempColumn);

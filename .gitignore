@@ -2,12 +2,5 @@
 .idea/
 itemErrorLog.xml
 config/config.yaml
-data/formatted/article/*
-data/formatted/book/*
-data/formatted/incollection/*
-data/formatted/inproceedings/*
-data/formatted/mastersthesis/*
-data/formatted/phdthesis/*
-data/formatted/proceedings/*
-data/formatted/www/*
+data/formatted/*
 data/dblp*

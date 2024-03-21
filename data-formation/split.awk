@@ -10,6 +10,7 @@ BEGIN{
   itemcount_mastersthesis = 0
   itemcount_phdthesis = 0
   itemcount_incollection = 0
+  itemcount_data = 0
 
   n_article = 0
   n_www = 0
@@ -19,6 +20,7 @@ BEGIN{
   n_mastersthesis = 0
   n_phdthesis = 0
   n_incollection = 0
+  n_data = 0
 
   f_article = "./data/formatted/article/article.xml";
   f_www = "./data/formatted/www/www.xml";
@@ -28,6 +30,7 @@ BEGIN{
   f_mastersthesis = "./data/formatted/mastersthesis/mastersthesis.xml";
   f_phdthesis = "./data/formatted/phdthesis/phdthesis.xml";
   f_incollection = "./data/formatted/incollection/incollection.xml";
+  f_data = "./data/formatted/data/data.xml";
 
 
   f = f_article;
@@ -52,6 +55,9 @@ BEGIN{
   print "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>" > f
   print "<db>" > f;
   f = f_incollection;
+  print "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>" > f
+  print "<db>" > f;
+  f = f_data;
   print "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>" > f
   print "<db>" > f;
 
@@ -139,6 +145,16 @@ BEGIN{
   c++;
 }
 
+/<data /{
+  f = f_data;
+  saveline = $0
+  if (match($0, /<data /)){
+    itemcount_data++;
+    $0 = saveline
+  }
+  c++;
+}
+
 c {
 if ($0 != "</list>") {
   print $0 > f
@@ -176,5 +192,21 @@ END {
 
   f = f_incollection
   print "</db>" > f;
+  close(f);
+
+  f = f_data
+  print "</db>" > f;
+  close(f);
+
+  f = "./data/formatted/count-items.txt";
+  print sprintf("article: %d", itemcount_article) > f
+  print sprintf("www: %d", itemcount_www) > f
+  print sprintf("book: %d", itemcount_book) > f
+  print sprintf("proceedings: %d", itemcount_proceedings) > f
+  print sprintf("inproceedings: %d", itemcount_inproceedings) > f
+  print sprintf("mastersthesis: %d", itemcount_mastersthesis) > f
+  print sprintf("phdthesis: %d", itemcount_phdthesis) > f
+  print sprintf("incollection: %d", itemcount_incollection) > f
+  print sprintf("data: %d", itemcount_data) > f
   close(f);
 }
