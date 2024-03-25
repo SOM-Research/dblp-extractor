@@ -4,14 +4,14 @@ dblp_url="https://dblp.org/xml/release/"
 
 : '
 We are going to download dblp xml and uncompress it.
-
+'
 
 last_release=$($CURL $dblp_url | awk -f ./data-formation/last-dblp-xml.awk )
 echo "last release is: $last_release"
 last_release_url="$dblp_url$last_release"
 echo "last release URL is: $last_release_url"
 $CURL $last_release_url > ./data/$last_release
-'
+
 last_release="dblp-2024-03-01.xml.gz"
 gzip -d ./data/$last_release
 
