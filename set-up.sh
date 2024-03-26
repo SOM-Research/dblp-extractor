@@ -102,7 +102,7 @@ gawk -v maxRecs=500000 -v RS='</article>\n' -v ORS= '
 
 echo "Splited article."
 
-sh data-formation/reformate-files-split-in-batches.sh data/formatted/article/small_article_1.xml data/formatted/artcle/article_1.xml
+sh data-formation/reformate-files-split-in-batches.sh data/formatted/article/small_article_1.xml data/formatted/article/article_1.xml
 sh data-formation/reformate-files-split-in-batches.sh data/formatted/article/small_article_2.xml data/formatted/article/article_2.xml
 sh data-formation/reformate-files-split-in-batches.sh data/formatted/article/small_article_3.xml data/formatted/article/article_3.xml
 sh data-formation/reformate-files-split-in-batches.sh data/formatted/article/small_article_4.xml data/formatted/article/article_4.xml
@@ -143,6 +143,12 @@ that means are publication or publication groups respectively
 gawk -f ./data-formation/split-books.awk
 
 echo "Splited books in p-group books and publication books"
+
+: '
+Remove small xmls.
+'
+
+ rm data/formatted/*/small*.xml
 
 : '
 Build and run Docker containers

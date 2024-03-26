@@ -33,3 +33,4 @@ psql -U postgres -f database/importer-publications.sql -v v1='/data/formatted/in
 psql -U postgres -f database/importer-publications.sql -v v1='/data/formatted/inproceedings/inproceedings_7.xml' -v v2="'inproceedings.xml'" -v v3="'//inproceedings'"
 
 psql -U postgres -f database/importer-editors.sql
+psql -U postgres -f database/importer-authorships.sql
