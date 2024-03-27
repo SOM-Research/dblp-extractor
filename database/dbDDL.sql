@@ -4,6 +4,8 @@ CREATE DATABASE metascience;
 
 \c metascience;
 
+CREATE EXTENSION pg_trgm;
+
 CREATE TABLE oid_xml (
     oid INT PRIMARY KEY,
     xml varchar(255),
@@ -22,6 +24,9 @@ CREATE TABLE researchers (
     xml_item TEXT
 );
 
+CREATE INDEX researcher_names_index ON researchers(names);
+CREATE INDEX researcher_xml_key_index ON researchers(xml_key);
+
 -- ALTER TABLE researcher_names CHARACTER SET utf8 COLLATE utf8_bin;
 -- ALTER TABLE researcher_names CONVERT TO CHARACTER SET utf8 COLLATE utf8_bin;
 
@@ -34,7 +39,6 @@ CREATE TABLE publication_venues(
 );
 
 ALTER TABLE publication_venues ADD CONSTRAINT publication_venues_name_unique UNIQUE (name);
-
 CREATE INDEX p_venue_names_index ON publication_venues(name);
 
 CREATE TABLE publication_groups(
@@ -58,6 +62,7 @@ CREATE TABLE publication_groups(
     FOREIGN KEY (publication_venue) REFERENCES publication_venues(uuid)
 );
 CREATE INDEX p_group_title_index ON publication_groups(title);
+CREATE INDEX p_group_editors_index ON publication_groups(editors);
 CREATE INDEX p_group_xml_key_index ON publication_groups(xml_key);
 
 CREATE TYPE publications_type as ENUM ('journal','thesis', 'conference', 'book', 'unknown');
@@ -69,12 +74,12 @@ CREATE TABLE publications(
     title TEXT,
     authors TEXT[],
     year int,
-    doi varchar(255),
-    crossref varchar (255),
-    pages varchar(255),
+    doi TEXT,
+    crossref TEXT,
+    pages TEXT,
     num_pages int,
     electronic_edition TEXT[],
-    xml_key VARCHAR(255),
+    xml_key TEXT,
     xml_mdate DATE,
     xml_item TEXT,
     FOREIGN KEY (publication_group_uuid) REFERENCES publication_groups(uuid)

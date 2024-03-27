@@ -26,3 +26,6 @@ INSERT INTO publications
             ,XMLPARSE(DOCUMENT convert_from(lo_get((SELECT oid FROM oid_xml WHERE xml = :v2 ORDER BY created_at DESC LIMIT 1)), 'LATIN1'))
         )
     ) AS tempTable(tempColumn);
+
+
+SELECT count(*) from publications;

@@ -43,3 +43,4 @@ INSERT INTO oid_xml values (:LASTOID, :v2, now());
         )
     ) AS tempTable(tempColumn);
 
+SELECT count(*) from publication_groups;

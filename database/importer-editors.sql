@@ -12,3 +12,4 @@ INSERT INTO editors (researcher_uuid, publication_group_uuid, position)
       WHERE  r.names && p.editors
     ) r ON overlapping_ranges IS NOT NULL;
 
+SELECT count(*) from editors;

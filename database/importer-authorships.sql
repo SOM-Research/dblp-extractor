@@ -12,3 +12,5 @@ INSERT INTO authorships (researcher_uuid, publication_uuid, position)
       WHERE  r.names && p.authors
     ) r ON overlapping_ranges IS NOT NULL;
 
+
+SELECT count(*) from authorships;
