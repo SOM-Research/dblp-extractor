@@ -78,7 +78,8 @@ gawk -v maxRecs=500000 -v RS='</www>\n' -v ORS= '
 
 echo "Splited www."
 
-echo "</db>" > data/formatted/www/www_1.xml
+cp data/formatted/www/small_www_1.xml data/formatted/www/www_1.xml
+echo "</db>" >> data/formatted/www/www_1.xml
 sh data-formation/reformate-files-split-in-batches.sh data/formatted/www/small_www_2.xml data/formatted/www/www_2.xml
 sh data-formation/reformate-files-split-in-batches.sh data/formatted/www/small_www_3.xml data/formatted/www/www_3.xml
 sh data-formation/reformate-files-split-in-batches.sh data/formatted/www/small_www_4.xml data/formatted/www/www_4.xml
@@ -106,7 +107,8 @@ gawk -v maxRecs=500000 -v RS='</article>\n' -v ORS= '
 
 echo "Splited article."
 
-echo "</db>" > data/formatted/article/article_1.xml
+cp data/formatted/article/small_article_1.xml data/formatted/article/article_1.xml
+echo "</db>" >> data/formatted/article/article_1.xml
 sh data-formation/reformate-files-split-in-batches.sh data/formatted/article/small_article_2.xml data/formatted/article/article_2.xml
 sh data-formation/reformate-files-split-in-batches.sh data/formatted/article/small_article_3.xml data/formatted/article/article_3.xml
 sh data-formation/reformate-files-split-in-batches.sh data/formatted/article/small_article_4.xml data/formatted/article/article_4.xml
@@ -134,7 +136,9 @@ gawk -v maxRecs=500000 -v RS='</inproceedings>\n' -v ORS= '
 
 echo "Splited inproceedings."
 
-echo "</db>" > data/formatted/inproceedings/small_inproceedings_1.xml
+cp data/formatted/inproceedings/small_inproceedings_1.xml data/formatted/inproceedings/inproceedings_1.xml
+echo "</db>" >> data/formatted/inproceedings/small_inproceedings_1.xml
+sh data-formation/reformate-files-split-in-batches.sh data/formatted/inproceedings/small_inproceedings_2.xml data/formatted/inproceedings/inproceedings_2.xml
 sh data-formation/reformate-files-split-in-batches.sh data/formatted/inproceedings/small_inproceedings_2.xml data/formatted/inproceedings/inproceedings_2.xml
 sh data-formation/reformate-files-split-in-batches.sh data/formatted/inproceedings/small_inproceedings_3.xml data/formatted/inproceedings/inproceedings_3.xml
 sh data-formation/reformate-files-split-in-batches.sh data/formatted/inproceedings/small_inproceedings_4.xml data/formatted/inproceedings/inproceedings_4.xml
