@@ -159,23 +159,5 @@ rm data/formatted/book/book.xml
 
 echo "Splited books in p-group books and publication books"
 
-: '
-Build and run Docker containers
-'
-
-echo "Run dockers: "
-
-docker compose build
-docker compose up -d
-
-: '
-To insert data to database we should execute set-up-database.sh from postgres docker container.
-'
-echo "insert data inside db container"
-docker compose exec -d db sh database/insert-data.sh
-
-: '
-Finally we are going to up the python project with their requirements. (TO DO)
-'
 
 echo "DONE"
