@@ -137,8 +137,7 @@ gawk -v maxRecs=500000 -v RS='</inproceedings>\n' -v ORS= '
 echo "Splited inproceedings."
 
 cp data/formatted/inproceedings/small_inproceedings_1.xml data/formatted/inproceedings/inproceedings_1.xml
-echo "</db>" >> data/formatted/inproceedings/small_inproceedings_1.xml
-sh data-formation/reformate-files-split-in-batches.sh data/formatted/inproceedings/small_inproceedings_2.xml data/formatted/inproceedings/inproceedings_2.xml
+echo "</db>" >> data/formatted/inproceedings/inproceedings_1.xml
 sh data-formation/reformate-files-split-in-batches.sh data/formatted/inproceedings/small_inproceedings_2.xml data/formatted/inproceedings/inproceedings_2.xml
 sh data-formation/reformate-files-split-in-batches.sh data/formatted/inproceedings/small_inproceedings_3.xml data/formatted/inproceedings/inproceedings_3.xml
 sh data-formation/reformate-files-split-in-batches.sh data/formatted/inproceedings/small_inproceedings_4.xml data/formatted/inproceedings/inproceedings_4.xml
