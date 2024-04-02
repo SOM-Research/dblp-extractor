@@ -11,8 +11,6 @@ echo "last release is: $last_release"
 last_release_url="$dblp_url$last_release"
 echo "last release URL is: $last_release_url"
 $CURL $last_release_url > ./data/$last_release
-
-last_release="dblp-2024-03-01.xml.gz"
 gzip -d ./data/$last_release
 
 echo "DBLP xml downloaded and uncompressed"
