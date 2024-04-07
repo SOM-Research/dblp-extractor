@@ -96,7 +96,5 @@ rm /data/formatted/inproceedings/inproceedings_5.xml
 rm /data/formatted/inproceedings/inproceedings_6.xml
 rm /data/formatted/inproceedings/inproceedings_7.xml
 
-#echo "start relate editors"
-#psql -U postgres -f database/importer-editors.sql
-#echo "start relate authorships"
-#psql -U postgres -f database/importer-authorships.sql
+echo "start insert relationships"
+psql -U postgres -f database/importer-relationships-many-to-many.sql
