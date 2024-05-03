@@ -13,12 +13,16 @@ INSERT INTO publications
       (xpath('//author/text()', tempTable.tempColumn))::varchar[],
       (xpath('//year/text()', tempTable.tempColumn))[1]::text::int,
       (regexp_match((xpath('//ee/text()', tempTable.tempColumn))::text, 'https:\/\/doi.org\/[0-9][0-9].[0-9][0-9][0-9][0-9]\/(.*)'))[1],
+      (xpath('//journal/text()', tempTable.tempColumn))[1]::text,
       (xpath('//crossref/text()', tempTable.tempColumn))[1]::text,
-      (xpath('//pages/text()', tempTable.tempColumn))::varchar[],
+      (xpath('//pages/text()', tempTable.tempColumn))[1]::text,
       0,
       (xpath('//ee/text()', tempTable.tempColumn))::varchar[],
+      FALSE,
+      NULL,
       (xpath('//@key', tempTable.tempColumn))[1]::text,
       to_date((xpath('//@mdate', tempTable.tempColumn))[1]::text, 'YYYY-MM-DD'),
+      :v2,
       tempTable.tempColumn
     FROM unnest(
       xpath
@@ -29,3 +33,4 @@ INSERT INTO publications
 
 
 SELECT count(*) from publications;
+

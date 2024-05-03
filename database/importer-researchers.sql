@@ -14,6 +14,7 @@
         (xpath('//crossref/text()', tempTable.tempColumn))[1]::text,
         (xpath('//@key', tempTable.tempColumn))[1]::text,
         to_date((xpath('//@mdate', tempTable.tempColumn))[1]::text, 'YYYY-MM-DD'),
+        :v2,
         tempTable.tempColumn
     FROM unnest(
       xpath

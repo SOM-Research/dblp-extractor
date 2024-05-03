@@ -5,7 +5,6 @@ dblp_url="https://dblp.org/xml/release/"
 : '
 We are going to download dblp xml and uncompress it.
 '
-
 last_release=$($CURL $dblp_url | awk -f ./data-formation/last-dblp-xml.awk )
 echo "last release is: $last_release"
 last_release_url="$dblp_url$last_release"

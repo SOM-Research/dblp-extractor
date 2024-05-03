@@ -57,7 +57,6 @@ c {
 
 END {
   f = f_b_authors
-  print "</db>" > f;
   close(f);
   f = f_b_editors
   print "</db>" > f;

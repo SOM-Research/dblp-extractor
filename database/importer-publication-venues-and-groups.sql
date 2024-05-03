@@ -7,7 +7,7 @@ INSERT INTO oid_xml values (:LASTOID, :v2, now());
   INSERT INTO publication_venues AS pv
     SELECT
       gen_random_uuid(),
-      (regexp_match((xpath('//@key', tempTable.tempColumn))::text, '.*\/(.*)\/.*'))[1],
+      (regexp_match((xpath('//@key', tempTable.tempColumn))::text, '(.*)\/.*'))[1],
       'unknown'
     FROM unnest(
       xpath
@@ -35,6 +35,7 @@ INSERT INTO oid_xml values (:LASTOID, :v2, now());
       (xpath('//ee/text()', tempTable.tempColumn))::varchar[],
       (xpath('//@key', tempTable.tempColumn))[1]::text,
       to_date((xpath('//@mdate', tempTable.tempColumn))[1]::text, 'YYYY-MM-DD'),
+      :v2,
       tempTable.tempColumn
     FROM unnest(
       xpath

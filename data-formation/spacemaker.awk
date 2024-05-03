@@ -1,10 +1,10 @@
 BEGIN {
 }
 
-/></ {
+/><|> <|>  </ {
     do {
         # change the current line
-        beg = match($0, "><");
+        beg = match($0, "><|> <|>  <");
         if (beg > 0) {
             str = substr($0, beg);
             end = index(str, "<");
