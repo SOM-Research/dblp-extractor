@@ -17,36 +17,11 @@ SET num_pages =
 WHERE pages ~ '^[0-9]{1,5}-[0-9]{1,5}$';
 
 UPDATE publications
-SET num_pages = -1
-WHERE pages = '1-';
-
-UPDATE publications
-SET num_pages = -10
-WHERE pages IS NULL;
-
-UPDATE publications
-SET num_pages = pages::int
-WHERE pages ~ '^[0-9]{1,9}$';
-
-UPDATE publications
-SET num_pages = -11
-WHERE pages ~ '^[0-9]{10,25}$';
-
-UPDATE publications
-SET num_pages = -100
-WHERE pages ~ '^e[0-9]{1,10}$';
-
-UPDATE publications
 SET num_pages =
     ((regexp_match(pages, '^[0-9]{1,10}:[0-9]{1,3}-[0-9]{1,10}:(.*)$'))[1])::int
     -
     ((regexp_match(pages, '^[0-9]{1,10}:(.*)-[0-9]{1,10}:[0-9]{1,3}$'))[1])::int
 WHERE pages ~ '^[0-9]{1,10}:[0-9]{1,3}-[0-9]{1,10}:[0-9]{1,3}$';
-
-UPDATE publications
-SET num_pages = 1
-WHERE pages ~ '^[0-9]{1,10}:1$' AND num_pages = 0;
-
 
 /*
 
