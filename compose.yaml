@@ -9,6 +9,8 @@ services:
     mem_limit: "16g"
     shm_size: '16gb'
     image: "postgres"
+    ports:
+      - "5432:5432"
     volumes:
       - "./database:/database"
       - "./data-formation:/data-formation"

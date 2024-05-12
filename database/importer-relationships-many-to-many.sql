@@ -88,8 +88,7 @@ DROP TABLE pub_group_temp;
 
 
 
-CREATE TABLE pub_group_temp
-(
+CREATE TABLE pub_group_tem
     uuid             UUID,
     publication_uuid UUID,
     title            TEXT,
@@ -145,3 +144,9 @@ FROM (SELECT title FROM pub_group_temp WHERE key LIKE 'books/%') AS s
 WHERE s.title = pv.name;
 
 DROP TABLE pub_group_temp;
+
+UPDATE publications SET type = 'conference' WHERE xml_key LIKE 'conf/%';
+UPDATE publications SET type = 'journal' WHERE xml_key LIKE 'journals/%';
+UPDATE publications SET type = 'book' WHERE xml_key LIKE 'books/%' AND type = 'unknown';
+UPDATE publications SET type = 'thesis' WHERE xml_tag = 'phdthesis' OR xml_tag = 'mastersthesis';
+UPDATE publications SET type = 'workshop' WHERE xml_item LIKE '%workshop%' AND (type = 'unknown' OR type = 'conference');
