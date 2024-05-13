@@ -19,7 +19,7 @@
     FROM unnest(
       xpath
         (    '//www'
-            ,XMLPARSE(DOCUMENT convert_from(lo_get((SELECT oid FROM oid_xml WHERE xml = 'www.xml' ORDER BY created_at DESC LIMIT 1)), 'LATIN1'))
+            ,XMLPARSE(DOCUMENT convert_from(lo_get((SELECT oid FROM oid_xml WHERE xml = 'www.xml' ORDER BY created_at DESC LIMIT 1)), 'UTF8'))
         )
     ) AS tempTable(tempColumn);
 

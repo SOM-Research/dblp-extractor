@@ -12,7 +12,7 @@ INSERT INTO oid_xml values (:LASTOID, :v2, now());
     FROM unnest(
       xpath
         (    :v3
-            ,XMLPARSE(DOCUMENT convert_from(lo_get((SELECT oid FROM oid_xml WHERE xml = :v2 ORDER BY created_at DESC LIMIT 1)), 'LATIN1'))
+            ,XMLPARSE(DOCUMENT convert_from(lo_get((SELECT oid FROM oid_xml WHERE xml = :v2 ORDER BY created_at DESC LIMIT 1)), 'UTF8'))
         )
     ) AS tempTable(tempColumn)
        ON CONFLICT ON CONSTRAINT publication_venues_name_unique DO NOTHING;
@@ -40,7 +40,7 @@ INSERT INTO oid_xml values (:LASTOID, :v2, now());
     FROM unnest(
       xpath
         (    :v3
-            ,XMLPARSE(DOCUMENT convert_from(lo_get((SELECT oid FROM oid_xml WHERE xml = :v2 ORDER BY created_at DESC LIMIT 1)), 'LATIN1'))
+            ,XMLPARSE(DOCUMENT convert_from(lo_get((SELECT oid FROM oid_xml WHERE xml = :v2 ORDER BY created_at DESC LIMIT 1)), 'UTF8'))
         )
     ) AS tempTable(tempColumn);
 

@@ -22,7 +22,7 @@ INSERT INTO update_temp
     FROM  unnest(
       xpath
         (   '//article'
-            ,XMLPARSE(DOCUMENT convert_from(lo_get((SELECT oid FROM oid_xml WHERE xml = 'update' ORDER BY created_at DESC LIMIT 1)), 'LATIN1'))
+            ,XMLPARSE(DOCUMENT convert_from(lo_get((SELECT oid FROM oid_xml WHERE xml = 'update' ORDER BY created_at DESC LIMIT 1)), 'UTF8'))
         )
     ) AS tempTable(tempColumn);
 
@@ -37,7 +37,7 @@ INSERT INTO update_temp
     FROM  unnest(
       xpath
         (   '//book'
-            ,XMLPARSE(DOCUMENT convert_from(lo_get((SELECT oid FROM oid_xml WHERE xml = 'update' ORDER BY created_at DESC LIMIT 1)), 'LATIN1'))
+            ,XMLPARSE(DOCUMENT convert_from(lo_get((SELECT oid FROM oid_xml WHERE xml = 'update' ORDER BY created_at DESC LIMIT 1)), 'UTF8'))
         )
     ) AS tempTable(tempColumn);
 
@@ -52,7 +52,7 @@ INSERT INTO update_temp
     FROM  unnest(
       xpath
         (   '//data'
-            ,XMLPARSE(DOCUMENT convert_from(lo_get((SELECT oid FROM oid_xml WHERE xml = 'update' ORDER BY created_at DESC LIMIT 1)), 'LATIN1'))
+            ,XMLPARSE(DOCUMENT convert_from(lo_get((SELECT oid FROM oid_xml WHERE xml = 'update' ORDER BY created_at DESC LIMIT 1)), 'UTF8'))
         )
     ) AS tempTable(tempColumn);
 
@@ -66,7 +66,7 @@ INSERT INTO update_temp
     FROM  unnest(
       xpath
         (   '//incollection'
-            ,XMLPARSE(DOCUMENT convert_from(lo_get((SELECT oid FROM oid_xml WHERE xml = 'update' ORDER BY created_at DESC LIMIT 1)), 'LATIN1'))
+            ,XMLPARSE(DOCUMENT convert_from(lo_get((SELECT oid FROM oid_xml WHERE xml = 'update' ORDER BY created_at DESC LIMIT 1)), 'UTF8'))
         )
     ) AS tempTable(tempColumn);
 
@@ -81,7 +81,7 @@ INSERT INTO update_temp
     FROM  unnest(
       xpath
         (   '//inproceedings'
-            ,XMLPARSE(DOCUMENT convert_from(lo_get((SELECT oid FROM oid_xml WHERE xml = 'update' ORDER BY created_at DESC LIMIT 1)), 'LATIN1'))
+            ,XMLPARSE(DOCUMENT convert_from(lo_get((SELECT oid FROM oid_xml WHERE xml = 'update' ORDER BY created_at DESC LIMIT 1)), 'UTF8'))
         )
     ) AS tempTable(tempColumn);
 
@@ -96,7 +96,7 @@ INSERT INTO update_temp
     FROM  unnest(
       xpath
         (   '//mastersthesis'
-            ,XMLPARSE(DOCUMENT convert_from(lo_get((SELECT oid FROM oid_xml WHERE xml = 'update' ORDER BY created_at DESC LIMIT 1)), 'LATIN1'))
+            ,XMLPARSE(DOCUMENT convert_from(lo_get((SELECT oid FROM oid_xml WHERE xml = 'update' ORDER BY created_at DESC LIMIT 1)), 'UTF8'))
         )
     ) AS tempTable(tempColumn);
 
@@ -110,7 +110,7 @@ INSERT INTO update_temp
     FROM  unnest(
       xpath
         (   '//phdthesis'
-            ,XMLPARSE(DOCUMENT convert_from(lo_get((SELECT oid FROM oid_xml WHERE xml = 'update' ORDER BY created_at DESC LIMIT 1)), 'LATIN1'))
+            ,XMLPARSE(DOCUMENT convert_from(lo_get((SELECT oid FROM oid_xml WHERE xml = 'update' ORDER BY created_at DESC LIMIT 1)), 'UTF8'))
         )
     ) AS tempTable(tempColumn);
 
@@ -125,7 +125,7 @@ INSERT INTO update_temp
     FROM  unnest(
       xpath
         (   '//proceedings'
-            ,XMLPARSE(DOCUMENT convert_from(lo_get((SELECT oid FROM oid_xml WHERE xml = 'update' ORDER BY created_at DESC LIMIT 1)), 'LATIN1'))
+            ,XMLPARSE(DOCUMENT convert_from(lo_get((SELECT oid FROM oid_xml WHERE xml = 'update' ORDER BY created_at DESC LIMIT 1)), 'UTF8'))
         )
     ) AS tempTable(tempColumn);
 
@@ -140,7 +140,7 @@ INSERT INTO update_temp
     FROM  unnest(
       xpath
         (   '//www'
-            ,XMLPARSE(DOCUMENT convert_from(lo_get((SELECT oid FROM oid_xml WHERE xml = 'update' ORDER BY created_at DESC LIMIT 1)), 'LATIN1'))
+            ,XMLPARSE(DOCUMENT convert_from(lo_get((SELECT oid FROM oid_xml WHERE xml = 'update' ORDER BY created_at DESC LIMIT 1)), 'UTF8'))
         )
     ) AS tempTable(tempColumn);
 
