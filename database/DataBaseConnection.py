@@ -1,4 +1,4 @@
-import mariadb
+import psycopg2
 import sqlalchemy
 import sys
 import yaml
@@ -11,19 +11,14 @@ class DataBaseConnection():
         self.session = None
 
     def config(self):
-        configFile = open("./config/config.yaml", "r")
+        configFile = open("../config/config.yaml", "r")
         return yaml.load(configFile, yaml.Loader)
 
     def connection(self):
         cfg = self.config()
         try:
-            conn = mariadb.connect(
-                host=cfg['db']['host'],
-                port=cfg['db']['port'],
-                user=cfg['db']['user'],
-                password=cfg['db']['password'],
-                autocommit=True)
-        except mariadb.Error as e:
+            conn = psycopg2.connect("dbname=metascience user=postgres")
+        except psycopg2.Error as e:
             print(f"Error connecting to the database: {e}")
             sys.exit(1)
         return conn
@@ -32,21 +27,11 @@ class DataBaseConnection():
         conn = self.connection()
         return conn.cursor()
 
-    def createDatabaseFromDDL(self, filePath):
-        db = self.connect()
-        ddlFile = open(filePath)
-        for line in ddlFile.read().split(';'):
-            if (line != ''):
-                line += ';'
-                print(line)
-                db.execute(line)
-        db.close()
-        ddlFile.close()
 
     def alchemySession(self):
         if self.session is None:
             cfg = self.config()
-            txt = "mariadb+mariadbconnector://" + cfg['db']['user'] + ":" + cfg['db']['password'] + "@" + cfg['db'][
+            txt = "postgresql+psycopg2://" + cfg['db']['user'] + ":" + cfg['db']['password'] + "@" + cfg['db'][
                 'host'] + ":" + str(cfg['db']['port']) + "/" + cfg['db']['db']
             engine = sqlalchemy.create_engine(txt)
             session = sqlalchemy.orm.sessionmaker()
