@@ -23,25 +23,22 @@ INSERT INTO temp_publications
     SELECT t.pub_uuid, t.author, array_position(p.authors, t.author)
     FROM publications AS p RIGHT JOIN temp_publications AS t ON (p.uuid = t.pub_uuid);
 DELETE FROM temp_publications WHERE position = 0;
-INSERT INTO authorships SELECT r.res_uuid, t.pub_uuid, t.position
+
+/*
+psql:database/importer-relationships-many-to-many.sql:28: ERROR:  null value in column "researcher_uuid" of relation "authorships" violates not-null constraint
+DETAIL:  Failing row contains (null, 3f41146d-a3c8-4e2f-bace-d63fbefef293, 4).
+
+*/
+INSERT INTO authorships
+SELECT r.res_uuid, t.pub_uuid, t.position
     FROM temp_researchers AS r RIGHT JOIN temp_publications AS t ON (r.name = t.author)
+        WHERE r.res_uuid IS NOT NULL AND t.pub_uuid IS NOT NULL
 ON CONFLICT ON CONSTRAINT PK_authorships DO NOTHING;
 
 DROP TABLE temp_pub_groups;
 DROP TABLE temp_researchers;
 DROP TABLE temp_publications;
 
-CREATE TABLE countries (
-    country varchar(2),
-    latitude FLOAT,
-    longitude FLOAT,
-    name TEXT
-);
-
-COPY countries (country, latitude, longitude, name)
-FROM '/data/csv/countries.csv'
-DELIMITER ','
-CSV HEADER;
 
 
 CREATE TABLE resercher_institution_temp (
@@ -58,15 +55,16 @@ INSERT INTO resercher_institution_temp (researcher_uuid, institution)
 
 DELETE FROM resercher_institution_temp WHERE  institution = ' ';
 
+
 INSERT INTO institutions (uuid, name, version_names)
-    SELECT DISTINCT ON (institution) gen_random_uuid(), institution, ARRAY[institution] FROM resercher_institution_temp;
+    SELECT DISTINCT ON (institution) gen_random_uuid(), institution, ARRAY[institution] FROM resercher_institution_temp
+ON CONFLICT ON CONSTRAINT institutions_name_unique DO NOTHING;
 
 INSERT INTO affiliations (researcher_uuid, institution_uuid)
-SELECT ri.researcher_uuid, i.uuid FROM resercher_institution_temp as ri LEFT JOIN institutions as i ON (ri.institution = i.name);
+SELECT ri.researcher_uuid, i.uuid FROM resercher_institution_temp as ri LEFT JOIN institutions as i ON (ri.institution = i.name)
+ON CONFLICT ON CONSTRAINT pk_affiliation DO NOTHING;;
 
 DROP TABLE resercher_institution_temp;
-
-
 
 CREATE TABLE pub_group_temp
 (
@@ -85,8 +83,6 @@ SET publication_group_uuid = pub_group_temp.uuid
 FROM pub_group_temp WHERE pub_group_temp.publication_uuid = publications.uuid;
 
 DROP TABLE pub_group_temp;
-
-
 
 CREATE TABLE pub_group_temp (
     uuid             UUID,
@@ -148,5 +144,5 @@ DROP TABLE pub_group_temp;
 UPDATE publications SET type = 'conference' WHERE type = 'unknown' AND xml_key LIKE 'conf/%';
 UPDATE publications SET type = 'journal' WHERE type = 'unknown' AND xml_key LIKE 'journals/%';
 UPDATE publications SET type = 'book' WHERE type = 'unknown' AND xml_key LIKE 'books/%';
-UPDATE publications SET type = 'thesis' WHERE type = 'unknown' AND xml_tag = 'phdthesis' OR xml_tag = 'mastersthesis';
+UPDATE publications SET type = 'thesis' WHERE type = 'unknown' AND (xml_tag = 'phdthesis' OR xml_tag = 'mastersthesis');
 UPDATE publications SET type = 'workshop' WHERE xml_item LIKE '%workshop%' AND (type = 'unknown' OR type = 'conference');
