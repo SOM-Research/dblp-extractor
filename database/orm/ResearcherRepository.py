@@ -1,4 +1,4 @@
-from model.Researcher import Researcher
+from model.Model import Researcher
 from sqlalchemy import select
 
 class ResearcherRepository():

@@ -1,7 +1,6 @@
 from sqlalchemy import select
-from sqlalchemy import func
 
-from model.Institution import Institution
+from model.Model import Institution
 
 class InstitutionRepository():
     def __init__(self, alchemySession):
