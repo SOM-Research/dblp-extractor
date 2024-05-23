@@ -1,5 +1,5 @@
 from model.Model import Researcher
-from sqlalchemy import select
+from sqlalchemy import select, text
 
 class ResearcherRepository():
     def __init__(self, session):
