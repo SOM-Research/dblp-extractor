@@ -49,3 +49,42 @@ class AuthorshipsRepository():
             " having count(a.researcher_uuid) > " + str(num))
         result = self.session.scalars(textual_sql)
         return result.all()
+
+    def getResearcherPerPublications(self):
+        textual_sql = text(
+            " select count(a.publication_uuid) "
+            " from authorships as a "
+            " group by a.publication_uuid")
+        result = self.session.scalars(textual_sql)
+        return result.all()
+    def getResearcherPerJournals(self):
+        textual_sql = text(
+            " select count(a.publication_uuid) "
+            " from authorships as a right join publications as p ON (a.publication_uuid = p.uuid)"
+            " where p.type = 'journal' "
+            " group by a.publication_uuid")
+        result = self.session.scalars(textual_sql)
+        return result.all()
+
+    def getResearcherPerConferences(self):
+        textual_sql = text(
+            " select count(a.publication_uuid) "
+            " from authorships as a right join publications as p ON (a.publication_uuid = p.uuid)"
+            " where p.type = 'conference' "
+            " group by a.publication_uuid")
+        result = self.session.scalars(textual_sql)
+        return result.all()
+
+    def getResearcherPerWorkshops(self):
+        textual_sql = text(
+            " select count(a.publication_uuid) "
+            " from authorships as a right join publications as p ON (a.publication_uuid = p.uuid)"
+            " where p.type = 'workshop' "
+            " group by a.publication_uuid")
+        result = self.session.scalars(textual_sql)
+        return result.all()
+
+
+
+
+
