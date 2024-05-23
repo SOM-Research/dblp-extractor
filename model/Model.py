@@ -77,6 +77,8 @@ class PublicationGroup(ModelBase):
     xml_item = Column(Text)
     crossref = Column(Text)
     model_editors: Mapped[List["Researcher"]] = relationship(secondary='editors', back_populates='publication_groups')
+    publications: Mapped[List["Publication"]] = relationship(back_populates="publication_group")
+
 class Publication(ModelBase):
     __tablename__ = "publications"
 

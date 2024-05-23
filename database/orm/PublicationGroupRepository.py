@@ -1,6 +1,6 @@
 from sqlalchemy import select
 
-from model.Model import PublicationGroup
+from model.Model import PublicationGroup, Publication
 
 
 class PublicationGroupRepository:
@@ -20,3 +20,9 @@ class PublicationGroupRepository:
         stmt = select(PublicationGroup).where(PublicationGroup.uuid == uuid)
         result = self.session.scalars(stmt)
         return result.first()
+
+    def getAll(self):
+        stmt = select(PublicationGroup)
+        result = self.session.scalars(stmt)
+        return result.all()
+

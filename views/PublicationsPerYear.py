@@ -1,8 +1,7 @@
-from database.orm.PublicationRespository import PublicationRepository
+from database.orm.PublicationRepository import PublicationRepository
 from database.DataBaseConnection import DataBaseConnection
 
 import matplotlib.pyplot as plt
-import numpy as np
 
 
 connection = DataBaseConnection()

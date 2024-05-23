@@ -1,5 +1,5 @@
 
-from database.orm.PublicationRespository import PublicationRepository
+from database.orm.PublicationRepository import PublicationRepository
 from database.DataBaseConnection import DataBaseConnection
 
 

@@ -1,5 +1,5 @@
 
-from database.orm.PublicationGroupRespository import PublicationGroupRepository
+from database.orm.PublicationGroupRepository import PublicationGroupRepository
 from database.DataBaseConnection import DataBaseConnection
 
 
@@ -16,3 +16,5 @@ print(result.title)
 for editor in result.model_editors:
     print(editor.current_alias)
     print(editor.uuid)
+print(len(result.publications))
+print(result.publications[0].title)
