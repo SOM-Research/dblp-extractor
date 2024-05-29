@@ -84,6 +84,14 @@ class AuthorshipsRepository():
         result = self.session.scalars(textual_sql)
         return result.all()
 
+    def researchersFirstPublicationsAfter1999(self):
+        textual_sql = text(
+            " select a.researcher_uuid, a.publication_uuid, p.year, p.type"
+            " from authorships as a right join publications as p ON (a.publication_uuid = p.uuid) "
+            " where a.position = 1 and p.year >= 2000"
+            )
+        result = self.session.scalars(textual_sql)
+        return result.all()
 
 
 

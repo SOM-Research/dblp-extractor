@@ -51,22 +51,36 @@ class PublicationRepository:
         result = self.session.scalars(textual_sql)
         return result.all()
 
-    def getNumPublicationsLessThan125PerPublicationGroupPeriodsBetween(self, since, until):
+    def getNumPublicationsAndYearPerPublicationGroupPeriodsBetween(self, since, until):
+        textual_sql = text(
+            " select count(p.publication_group_uuid), pg.year"
+            " from publications as p left join publication_groups as pg on (pg.uuid = p.publication_group_uuid) "
+            " where pg.year is not null and p.year BETWEEN " + str(since) + " AND " + str(until) +
+            " group by p.publication_group_uuid, pg.uuid, pg.year"
+        )
+        result = self.session.execute(textual_sql)
+        return result.all()
+
+    def getNumPublicationsPerPublicationGroupPeriodsBetween(self, since, until):
         textual_sql = text(
             " select count(p.publication_group_uuid) "
             " from publications as p left join publication_groups as pg on (pg.uuid = p.publication_group_uuid) "
             " where p.year BETWEEN " + str(since) + " AND " + str(until) +
             " group by p.publication_group_uuid, pg.uuid, pg.title"
-            " having count(p.publication_group_uuid) < 125")
+            )
         result = self.session.scalars(textual_sql)
         return result.all()
 
-    def getNumPublicationsMoreThan124PerPublicationGroupPeriodsBetween(self, since, until):
+    def getTitlesFromNamedConference(self, initials):
         textual_sql = text(
-            " select count(p.publication_group_uuid) "
-            " from publications as p left join publication_groups as pg on (pg.uuid = p.publication_group_uuid) "
-            " where p.year BETWEEN " + str(since) + " AND " + str(until) +
-            " group by p.publication_group_uuid, pg.uuid, pg.title"
-            " having count(p.publication_group_uuid) > 124")
+            " select p.title "
+            " from publications as p left join publication_groups as pg on (p.publication_group_uuid = pg.uuid)"
+            " where pg.booktitle = '" + initials + "'"
+        )
         result = self.session.scalars(textual_sql)
+        return result.all()
+
+    def getTitlesFromJournal(self, journal):
+        stmt = select(Publication.title).where(Publication.journal == journal)
+        result = self.session.scalars(stmt)
         return result.all()
