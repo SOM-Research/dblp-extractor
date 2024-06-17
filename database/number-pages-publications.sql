@@ -54,3 +54,5 @@ Select xml_key from publications where title LIKE LIKE '%' ||
 
 Select p1.xml_key, p2.xml_key from publications as p1 JOIN publications as p2 ON (p1.title LIKE 'Corrigendum to %');
 */
+
+

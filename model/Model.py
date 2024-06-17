@@ -102,3 +102,22 @@ class Publication(ModelBase):
     publication_group_uuid: Mapped[UUID] = mapped_column(ForeignKey("publication_groups.uuid"))
     publication_group: Mapped["PublicationGroup"] = relationship()
     model_authors: Mapped[List["Researcher"]] = relationship(secondary='authorships', back_populates='publications')
+
+class FirstPublications(ModelBase):
+    __tablename__ = "authorships_temp"
+
+    researcher_uuid = Column( "researcher_uuid", UUID, ForeignKey("researchers.uuid"), primary_key=True)
+    researcher_name = Column(String)
+    position = Column(Integer, primary_key=True)
+    publication_uuid = Column("publication_uuid", UUID, ForeignKey("publications.uuid"), primary_key=True)
+    year_publication = Column(Integer)
+    type = Column(String)
+    year_frist_publication = Column(Integer)
+    num_publications = Column(Integer)
+    has_publications_before = Column(Boolean)
+
+class PublicationsFiltered(ModelBase):
+    __tablename__ = "confs_and_journals_uuid"
+
+    uuid = Column(UUID,  primary_key=True)
+    publication_group_name = Column(String)
